@@ -12,12 +12,25 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Lato', ...defaultTheme.fontFamily.sans],
+                sans: ['Roboto Flex', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                main_bg: '#ECEBF3',
-                maroon: {
-                    500: '#ECEBF3'
+                azure: {
+                    400: '#112E3B',
+                    500: '#0A1C2B',
+                    600: '#1E1E1E'
+                },
+                mint: {
+                    200: '#EFF5E9',
+                    500: '#DEFEC0',
+                    800: '#118891',
+                    900: '#295A57',
+                },
+                bright: {
+                    40: '#E2F1F0',
+                    400: '#edf3e7',
+                    500: '#E8EFE2',
+                    600: '#D3DCCB',
                 }
             },
             screens: {

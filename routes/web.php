@@ -8,6 +8,8 @@ use App\Livewire\Pages\Auth\LoginPage;
 use App\Livewire\Pages\Auth\RegisterPage;
 use App\Livewire\Pages\Auth\ResetPasswordPage;
 use App\Livewire\Pages\Auth\VerifyEmailPage;
+use App\Livewire\Pages\Portal\ArticleListPage;
+use App\Livewire\Pages\Portal\ArticlePage;
 use App\Livewire\Pages\Portal\IndexPage;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +52,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/', IndexPage::class)->name('portal.index');
+Route::get('/articles', ArticleListPage::class)->name('portal.article_list');
+Route::get('/articles/{slug}', ArticlePage::class)->name('portal.article');
 
 Route::middleware('auth')->prefix('account')->group(function () {
     Route::get('settings', SettingsPage::class)->middleware(['auth', 'verified'])->name('account.settings');

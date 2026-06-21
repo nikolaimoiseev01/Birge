@@ -39,6 +39,11 @@ return [
     */
 
     'layout' => 'layouts.portal',
+    'component_layout' => 'layouts::portal',
+    'make_command' => [
+        'type' => 'class',
+        'emoji' => false,
+    ],
 
     /*
     |---------------------------------------------------------------------------
