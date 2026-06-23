@@ -90,18 +90,22 @@
 </section>
 
 @push('scripts')
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            new Swiper('.other-articles-swiper', {
+        function initOtherArticlesSwiper() {
+            const el = document.querySelector('.other-articles-swiper')
+
+            if (!el) {
+                return
+            }
+
+            if (el.swiper) {
+                el.swiper.destroy(true, true)
+            }
+
+            new Swiper(el, {
+                speed: 700,
                 slidesPerView: 3,
                 spaceBetween: 16,
-                speed: 700,
-
-                navigation: {
-                    prevEl: '.other-articles-prev',
-                    nextEl: '.other-articles-next',
-                },
 
                 breakpoints: {
                     0: {
@@ -118,6 +122,12 @@
                     },
                 },
             })
+        }
+
+        document.addEventListener('DOMContentLoaded', initOtherArticlesSwiper)
+
+        document.addEventListener('livewire:navigated', () => {
+            setTimeout(initOtherArticlesSwiper, 0)
         })
     </script>
 @endpush
