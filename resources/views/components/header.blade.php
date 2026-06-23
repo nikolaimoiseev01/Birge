@@ -80,7 +80,18 @@
                 </x-Ui.link>
 
                 {{-- Lang --}}
-                <div x-data="{ open: false, lang: 'Ru' }" class="relative">
+                <div
+                    x-data="{
+        open: false,
+        lang: 'Ru',
+        langs: ['Ru', 'Kz', 'En'],
+
+        otherLangs() {
+            return this.langs.filter(item => item !== this.lang)
+        }
+    }"
+                    class="relative"
+                >
                     <button
                         type="button"
                         @click="open = !open"
@@ -117,21 +128,14 @@
                         x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
                         class="absolute right-0 top-full z-50 mt-3 flex w-[51px] flex-col gap-4 rounded-[8px] border border-white/60 bg-[#e2f1f0]/10 p-4 text-white shadow-[0_8px_30px_rgba(0,0,0,.25)] backdrop-blur-md"
                     >
-                        <button
-                            type="button"
-                            @click="lang = 'Kz'; open = false"
-                            class="text-left text-base font-medium transition hover:text-[#8dd5c2]"
-                        >
-                            Kz
-                        </button>
-
-                        <button
-                            type="button"
-                            @click="lang = 'En'; open = false"
-                            class="text-left text-base font-medium transition hover:text-[#8dd5c2]"
-                        >
-                            En
-                        </button>
+                        <template x-for="item in otherLangs()" :key="item">
+                            <button
+                                type="button"
+                                @click="lang = item; open = false"
+                                class="text-left text-base font-medium transition hover:text-[#8dd5c2]"
+                                x-text="item"
+                            ></button>
+                        </template>
                     </div>
                 </div>
 
