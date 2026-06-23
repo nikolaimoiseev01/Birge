@@ -108,9 +108,21 @@ document.addEventListener('click', (e) => {
     Livewire.navigate(url.pathname + url.search + url.hash);
 });
 
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+}
+
 document.addEventListener('livewire:navigated', () => {
     setTimeout(() => {
-        scrollToHash(window.location.hash);
+        if (window.location.hash) {
+            scrollToHash(window.location.hash);
+            return;
+        }
+
+        scrollToTop();
     }, 100);
 });
 

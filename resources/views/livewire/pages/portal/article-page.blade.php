@@ -106,6 +106,9 @@
                 speed: 700,
                 slidesPerView: 3,
                 spaceBetween: 16,
+                preventClicks: false,
+                preventClicksPropagation: false,
+                touchStartPreventDefault: false,
 
                 breakpoints: {
                     0: {
