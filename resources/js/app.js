@@ -4,15 +4,15 @@ import {livewire_hot_reload} from 'virtual:livewire-hot-reload'
 import Swiper from 'swiper';
 // import Swiper styles
 import 'swiper/css';
-import { Navigation, Pagination } from 'swiper/modules';
+import {Navigation, Pagination} from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { gsap } from "gsap";
+import {gsap} from "gsap";
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {ScrollSmoother} from "gsap/ScrollSmoother";
 
 import Lenis from 'lenis'
 
@@ -27,7 +27,7 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
-gsap.registerPlugin(ScrollTrigger,ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 Swiper.use([Navigation, Pagination]);
 window.Swiper = Swiper;
@@ -59,4 +59,64 @@ window.revealOnScroll = function revealOnScroll(delay = 0) {
         },
     };
 }
+
+
+function scrollToHash(hash) {
+    if (!hash) {
+        return;
+    }
+
+    const target = document.querySelector(hash);
+
+    if (!target) {
+        return;
+    }
+
+    const headerOffset = 90;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+    window.scrollTo({
+        top,
+        behavior: 'smooth',
+    });
+}
+
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-anchor-link]');
+
+    if (!link) {
+        return;
+    }
+
+    const url = new URL(link.href);
+    const currentUrl = new URL(window.location.href);
+
+    if (!url.hash) {
+        return;
+    }
+
+    e.preventDefault();
+
+    const samePath = url.pathname === currentUrl.pathname;
+
+    if (samePath) {
+        history.pushState(null, '', url.hash);
+        scrollToHash(url.hash);
+        return;
+    }
+
+    Livewire.navigate(url.pathname + url.search + url.hash);
+});
+
+document.addEventListener('livewire:navigated', () => {
+    setTimeout(() => {
+        scrollToHash(window.location.hash);
+    }, 100);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        scrollToHash(window.location.hash);
+    }, 100);
+});
 

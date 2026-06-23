@@ -3,17 +3,20 @@
         [
             'key' => 'about',
             'title' => 'О компании',
-            'href' => '#about',
+            'href' => route('portal.index') . '#about',
+            'anchor' => true,
         ],
         [
             'key' => 'team',
             'title' => 'Команда',
-            'href' => '#team',
+            'href' => route('portal.index') . '#team',
+            'anchor' => true,
         ],
         [
             'key' => 'services',
             'title' => 'Услуги',
-            'href' => '#services',
+            'href' => route('portal.index') . '#articles',
+            'anchor' => true,
         ],
         [
             'key' => 'articles',
@@ -24,7 +27,8 @@
         [
             'key' => 'platform',
             'title' => 'Платформа Бирге',
-            'href' => '#platform',
+            'href' => route('portal.index') . '#platform',
+            'anchor' => true,
         ],
     ];
 @endphp
@@ -58,6 +62,7 @@
                 @foreach($menu as $item)
                     <a
                         href="{{ $item['href'] }}"
+                        @if(!empty($item['anchor'])) data-anchor-link @endif
                         @mouseenter="hovered = '{{ $item['key'] }}'"
                         @mouseleave="hovered = null"
                         :class="hovered && hovered !== '{{ $item['key'] }}' ? 'opacity-40' : 'opacity-100'"
@@ -183,6 +188,7 @@
                 @foreach($menu as $item)
                     <a
                         href="{{ $item['href'] }}"
+                        @if(!empty($item['anchor'])) data-anchor-link @endif
                         @click="menuOpen = false"
                         @if(!empty($item['navigate'])) wire:navigate @endif
                         class="{{ !empty($item['navigate']) ? 'js-page-transition' : '' }} transition-opacity hover:opacity-60"

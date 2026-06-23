@@ -1,4 +1,4 @@
-<section id="services" class="h-screen md:h-auto services-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
+<section id="about" class="h-screen md:h-auto services-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
     <style>
         .gradient-border-cirle {
             border-radius: 9999px;
