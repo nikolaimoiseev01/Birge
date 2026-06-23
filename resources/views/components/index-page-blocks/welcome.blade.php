@@ -1,14 +1,14 @@
 <section class="flex items-center min-h-screen text-white md:pb-14 sm:px-4">
     <div
-        class="mx-auto grid container grid-cols-[1.35fr_.65fr] gap-16 transition-all lg:grid-cols-1 lg:gap-10 md:mt-10">
+        class="mx-auto grid container grid-cols-[1.35fr_.65fr] gap-16 transition-all lg:grid-cols-1 lg:gap-10 lg:mt-32 md:w-full">
         <div
             x-data="revealOnScroll(100)"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
             class="transition-all duration-900 ease-out z-20 mx-auto"
         >
-            <h1 class="text-white min-w-max leading-[60px] xl:!min-w-0 mb-16">
-                Команда профессионалов в области<br>
-                организационного дизайна,<br>
+            <h1 class="text-white min-w-max leading-[60px] lg:leading-none md:!leading-tight xl:!min-w-0 mb-16">
+                Команда профессионалов в области<br class="md:hidden">
+                организационного дизайна,<br class="md:hidden">
                 вознаграждения и формирования<br>
                 управленческих команд<br>
             </h1>
@@ -27,10 +27,10 @@
                                 fill="#DEFEC0"/>
                         </svg>
                         <div>
-                            <p class="text-xl font-semibold leading-tight text-mint-500">
+                            <p class="text-xl md:text-sm font-semibold leading-tight text-mint-500">
                                 {{ $item['title'] }}
                             </p>
-                            <p class="mt-1 leading-relaxed text-white">
+                            <p class="mt-1 leading-relaxed text-white md:text-sm">
                                 {{ $item['text'] }}
                             </p>
                         </div>
@@ -43,15 +43,48 @@
         </div>
 
         <article
-            x-data="{ shown: false }"
+            x-data="{
+        shown: false,
+        hover: false,
+        x: 0,
+        y: 0,
+
+        init() {
+            setTimeout(() => this.shown = true, 2000)
+        },
+
+move(e) {
+    const rect = this.$el.getBoundingClientRect()
+
+    this.x = e.clientX - rect.left
+    this.y = e.clientY - rect.top
+}
+    }"
             x-cloak
-            x-init="setTimeout(() => shown = true, 2000)"
+            @click="$refs.link.click()"
+            @mouseenter="hover = true; move($event)"
+            @mouseleave="hover = false"
+            @mousemove="move($event)"
             :class="shown ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'"
-            class="z-20 relative -bottom-14 self-end max-w-[350px] min-w-[350px]
+            class="relative z-20 -bottom-20 md:bottom-auto md:!min-w-0 self-end max-w-[350px] min-w-[350px]
            flex flex-col gap-4 rounded-lg border border-white bg-mint-500/10
            p-4 backdrop-blur transition-all duration-1000 ease-out
-           lg:max-w-md"
+           lg:max-w-md overflow-hidden hover:cursor-none"
         >
+            <a
+                href="{{ route('portal.article', $firstArticle->slug) }}"
+                wire:navigate
+                x-ref="link"
+                :style="`transform: translate(${x}px, ${y}px) translate(-50%, -50%)`"
+                :class="hover ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
+                class="absolute left-0 top-0 z-30
+           px-5 py-3 rounded-full bg-azure-500 text-white whitespace-nowrap
+           pointer-events-none
+           transition-[transform,opacity,scale]
+           duration-75 ease-out"
+            >
+                Читать статью
+            </a>
             <div class="aspect-[16/10] overflow-hidden bg-white/10 rounded-lg">
                 <img
                     src="{{ $firstArticle->getFirstMediaUrl('cover') }}"
@@ -60,13 +93,20 @@
                 >
             </div>
 
-            <h2 class="text-[22px] font-semibold leading-tight line-clamp-4">
+            <h2 class="text-[22px] md:!text-[17px] font-semibold leading-tight line-clamp-4">
                 {{ $firstArticle->title }}
             </h2>
 
             <p class="leading-relaxed text-white line-clamp-4">
                 {{ $firstArticle->description }}
             </p>
+
+            <a
+                href="{{ route('portal.article', $firstArticle->slug) }}"
+                class="hidden md:block text-white underline text-sm"
+            >
+                Читать статью
+            </a>
         </article>
     </div>
 </section>

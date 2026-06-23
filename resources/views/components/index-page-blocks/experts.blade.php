@@ -23,6 +23,7 @@
             </div>
         </div>
 
+
         <div
             x-data="revealOnScroll(150)"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
@@ -31,27 +32,29 @@
             <div class="swiper-wrapper">
                 @foreach($experts as $expert)
                     <article
-                        class="swiper-slide cursor-pointer overflow-hidden rounded bg-[#102b34]"
+                        class="swiper-slide cursor-pointer overflow-hidden rounded max-w-[328px] md:max-w-[280px]"
                         @click="$dispatch('open-expert', { id: {{ $expert->id }} })"
                     >
-                        <img
-                            data-expert-image="{{ $expert->id }}"
-                            src="{{ $expert->getFirstMediaUrl('image') }}"
-                            alt="{{ $expert->name }}"
-                            class="h-[362px] w-[328px] object-cover"
-                        >
+                        <div class="overflow-hidden rounded-lg h-[362px] w-[328px] md:w-[280px] md:h-[309px]">
+                            <img
+                                data-expert-image="{{ $expert->id }}"
+                                src="{{ $expert->getFirstMediaUrl('image') }}"
+                                alt="{{ $expert->name }}"
+                                class="object-cover transition hover:scale-105 duration-500"
+                            >
+                        </div>
 
-                        <div class="min-h-[150px] p-4">
-                            <h3 class="text-lg font-semibold leading-tight">
+                        <div class="min-h-[190px] md:min-h-[153px] max-w-[328px] md:max-w-[280px] bg-azure-500/10 p-4 flex flex-col">
+                            <h3 class="text-[22px] md:text-[17px] font-semibold leading-tight">
                                 {{ $expert->name }}
                             </h3>
 
-                            <p class="mt-2 text-sm leading-snug text-white/55">
+                            <p class="mt-2 text-lg md:text-sm leading-snug text-white/60">
                                 {{ $expert->description_short }}
                             </p>
 
-                            <span class="mt-4 block text-sm text-white/75">
-            Подробнее
+                            <span class="font-normal md:text-sm block mt-auto text-lg text-white">
+            {{ $expert->email }}
         </span>
                         </div>
                     </article>
@@ -76,9 +79,6 @@
             }
 
             new Swiper(el, {
-                slidesPerView: 4,
-                slidesPerGroup: 4,
-                spaceBetween: 14,
                 speed: 650,
                 navigation: {
                     nextEl: '.team-next',
@@ -86,20 +86,19 @@
                 },
                 breakpoints: {
                     0: {
-                        slidesPerView: 1.15,
-                        slidesPerGroup: 1,
+                        slidesPerView: 'auto',
+                        spaceBetween: 10,
+                        centeredSlides: false,
                     },
-                    640: {
+                    900: {
                         slidesPerView: 2,
                         slidesPerGroup: 2,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                        slidesPerGroup: 3,
+                        spaceBetween: 14,
                     },
                     1024: {
                         slidesPerView: 4,
                         slidesPerGroup: 4,
+                        spaceBetween: 14,
                     },
                 },
             });

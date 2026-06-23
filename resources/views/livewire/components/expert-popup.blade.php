@@ -7,7 +7,7 @@
 >
     <div
         x-show="isOpen"
-        class="fixed inset-0 z-[9999] overflow-hidden bg-[#eef6ea] text-[#285d59]"
+        class="fixed inset-0 z-[9999] overflow-hidden md:overflow-auto bg-[#eef6ea] text-[#285d59]"
         x-transition:enter="transition duration-500 ease-out"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -17,7 +17,7 @@
     >
         <button
             @click="close()"
-            class="gradient-border-cirle absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-mint-900/10 transition hover:bg-mint-900/20">
+            class="gradient-border-cirle md:fixed absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-mint-900/10 transition hover:bg-mint-900/20">
             <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="7.77734" y="9.19249" width="2" height="24" transform="rotate(-45 7.77734 9.19249)" fill="#295A57"/>
                 <rect x="9.19141" y="26.1627" width="2" height="24" transform="rotate(-135 9.19141 26.1627)" fill="#295A57"/>
@@ -26,14 +26,14 @@
 
         <div class="grid min-h-screen grid-cols-[48%_52%] md:grid-cols-1">
             <div class="relative flex flex-col border-r border-[#b6d8d0] md:border-r-0">
-                <div class="flex flex-1 items-center justify-center px-16 py-20 md:px-4 md:py-10">
+                <div class="flex flex-1 items-center justify-center px-16 py-20 md:px-4 md:py-10 md:relative md:bottom-8">
                     <div
                         x-ref="targetImageBox"
                         class="h-[530px] w-[480px] overflow-hidden rounded xl:h-[420px] xl:w-[420px] md:h-[360px] md:w-full"
                     ></div>
                 </div>
 
-                <div class="grid h-24 grid-cols-2 border-t border-[#b6d8d0]">
+                <div class="grid h-24 grid-cols-2 border-t border-[#b6d8d0] md:fixed md:bottom-0 md:w-full md:bg-[#eef6ea]">
                     <button
                         type="button"
                         @click="change('prev')"

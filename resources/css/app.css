@@ -22,12 +22,16 @@ body {
     @apply bg-azure-500;
 }
 
+p {
+    @apply text-lg md:text-sm;
+}
+
 .container {
-    @apply mx-auto max-w-[1361px] w-full;
+    @apply mx-auto max-w-[1361px] w-[90%];
 }
 
 h1 {
-    @apply text-[54px] font-semibold md:!text-[23px] sm:text-[2rem];
+    @apply text-[54px] font-semibold lg:text-[40px] md:!text-[23px] sm:text-[2rem];
 }
 
 h2 {

@@ -1,6 +1,7 @@
 @props([
     'type' => 'mint',
     'href' => '#',
+    'navigate' => true
 ])
 
 @php
@@ -22,7 +23,7 @@
 
 <a
     href="{{ $href }}"
-    wire:navigate
+    @if($navigate) wire:navigate @endif
     x-data="{ active: false, ready: true }"
     @mouseenter="
         ready = false;

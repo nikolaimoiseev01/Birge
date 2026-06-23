@@ -16,12 +16,12 @@
     @section('title')
         {{$article['title']}}
     @endsection
-    <div class="flex flex-col mb-24 container">
+    <div class="flex flex-col mb-24 container md:mb-12">
         <div class="w-full py-12">
             <div class="w-full article-content flex flex-col items-center ">
                 <div x-data="revealOnScroll()"
                      :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                     class="grid grid-cols-3  mb-6 w-full transition-all duration-700 ease-out">
+                     class="grid grid-cols-3 md:flex md:flex-col  mb-6 w-full transition-all duration-700 ease-out md:gap-8">
                     <a
                         wire:navigate
                         href="{{ route('portal.article_list') }}"
@@ -46,35 +46,78 @@
                     </a>
 
                     <span
-                        class="mx-auto  px-3 py-2 text-sm text-center text-azure-500/40 uppercase w-fit">
+                        class="mx-auto  px-3 py-2 text-sm text-center text-azure-500/40 uppercase w-fit md:px-0 md:text-start md:mx-0">
                     {{ $article->category->name }}/{{ $article['date'] }}
                 </span>
-                    <div></div>
                 </div>
 
-                <h1                     x-data="revealOnScroll()"
-                                        :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                    class="mb-8 max-w-5xl leading-none text-center transition-all duration-700 ease-out">{{$article['title']}}</h1>
-                <span                    x-data="revealOnScroll()"
-                                         :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                                         class=""
+                <h1 x-data="revealOnScroll()"
+                    :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
+                    class="mb-8 max-w-5xl leading-none text-center transition-all duration-700 ease-out md:text-start">{{$article['title']}}</h1>
+                <span x-data="revealOnScroll()"
+                      :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
                       class="transition-all duration-700 ease-out max-w-2xl text-lg font-normal text-center">{{$article['description']}}</span>
             </div>
         </div>
 
-        <img src="{{$article->getFirstMediaUrl('cover')}}" class="w-full rounded-lg max-h-[642px] object-cover" alt="">
+        <img
+            x-data="revealOnScroll()"
+            :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
+            src="{{$article->getFirstMediaUrl('cover')}}" class=" transition-all duration-700 ease-out w-full rounded-lg max-h-[642px] object-cover md:aspect-square" alt="">
 
     </div>
     <x-article-content :article="$article"/>
 
-    <div                     x-data="revealOnScroll()"
-                             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                            class="transition-all duration-700 ease-out flex flex-col gap-4 container pb-[150px] border-b border-black/40 mb-6">
-        <h2 class="text-nowrap md:text-center text-black mb-10">Другие статьи</h2>
-        <div class="flex gap-4 md:flex-col">
-            @foreach($otherArticles as $article)
-                <x-article-card color="dark" :article="$article"/>
-            @endforeach
+    <div
+        x-data="revealOnScroll()"
+        :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
+        class="container mb-6 flex flex-col gap-4 border-b border-black/40 pb-[150px] md:pb-[80px] transition-all duration-700 ease-out"
+    >
+        <div class="mb-10 flex items-center justify-between md:mb-6">
+            <h2 class="text-nowrap text-black">Другие статьи</h2>
+        </div>
+
+        <div class="swiper other-articles-swiper w-full overflow-hidden">
+            <div class="swiper-wrapper">
+                @foreach($otherArticles as $article)
+                    <div class="swiper-slide !h-auto">
+                        <x-article-card color="dark" :article="$article"/>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </section>
+
+@push('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            new Swiper('.other-articles-swiper', {
+                slidesPerView: 3,
+                spaceBetween: 16,
+                speed: 700,
+
+                navigation: {
+                    prevEl: '.other-articles-prev',
+                    nextEl: '.other-articles-next',
+                },
+
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1.1,
+                        spaceBetween: 12,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 16,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 16,
+                    },
+                },
+            })
+        })
+    </script>
+@endpush

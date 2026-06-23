@@ -1,4 +1,4 @@
-<div class="container mx-auto flex max-w-7xl pt-10 mb-[180px] gap-8">
+<div class="container mx-auto flex max-w-7xl pt-10 mb-[180px] gap-8 md:mb-[80px]">
 
     <!-- Main Article -->
     <main class="w-2/3 space-y-12 lg:w-full">
@@ -9,8 +9,8 @@
                     :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
                     class="transition-all duration-700 ease-out"
                 >
-                    <h2 id="{{Str::slug($topic['title'])}}" class="text-black font-semibold text-2xl scroll-mt-12 mb-6">{{$topic['title']}}</h2>
-                    <p class="text-xl">
+                    <h2 id="{{Str::slug($topic['title'])}}" class="text-black font-semibold text-2xl scroll-mt-12 mb-6 md:text-[16px]">{{$topic['title']}}</h2>
+                    <p class="text-xl md:text-sm">
                         {!! $topic['text'] !!}
                     </p>
 

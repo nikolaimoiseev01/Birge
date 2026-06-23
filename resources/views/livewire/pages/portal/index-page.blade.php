@@ -46,7 +46,7 @@
 
     <x-index-page-blocks.analytics :articles="$articles"/>
 
-    <div class="h-48 bg-gradient-to-b to-azure-500 from-bright-400 relative z-40"></div>
+    <div class="h-48 bg-gradient-to-b to-[#16343F] from-bright-400 relative z-40"></div>
 
     <x-index-page-blocks.telegram :telegramPosts="$telegramPosts"/>
 

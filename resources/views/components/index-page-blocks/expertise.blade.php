@@ -1,4 +1,4 @@
-<section id="services" class="h-screen services-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
+<section id="services" class="h-screen md:h-auto services-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
     <style>
         .gradient-border-cirle {
             border-radius: 9999px;
@@ -30,7 +30,7 @@
             pointer-events: none;
         }
     </style>
-    <div class="mx-auto container">
+    <div class="mx-auto container md:w-full">
         <h2
             x-data="revealOnScroll()"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
@@ -44,10 +44,10 @@
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
             class="services-viewport overflow-visible transition-all duration-700 ease-out"
         >
-            <div class="services-track flex gap-4 will-change-transform">
+            <div class="services-track flex md:flex-col gap-4 will-change-transform">
                 @foreach($expertise as $key => $item)
                     <article
-                        class="@if($loop->even) mt-10 @endif p-6 birge-soft-card relative flex h-[520px] w-[520px] min-w-[520px] flex-col justify-end rounded-lg bg-[#D3DCCB] group hover:bg-mint-800"
+                        class="@if($loop->even) mt-10 md:mt-0 @endif p-6 birge-soft-card relative flex h-[520px] w-[520px] md:w-full md:min-w-0 md:min-h-[328px] md:h-auto min-w-[520px] flex-col justify-end rounded-lg bg-[#D3DCCB] group hover:bg-mint-800"
                     >
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.1.svg" class="absolute {{$item['bg-class']}} transition group-hover:opacity-0" alt="">
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.2.svg" class="absolute {{$item['bg-class']}} transition group-hover:opacity-0" alt="">
@@ -66,11 +66,11 @@
                         <h3 class="max-w-sm text-4xl min-w-full font-medium text-[#295A57] md:text-xl relative z-20 group-hover:hidden transition">
                             {!! $item['title'] !!}
                         </h3>
-                        <div class="flex-col relative z-40 text-white text-lg hidden group-hover:flex transition">
-                            <ul class='list-disc space-y-1 pl-4 leading-[1.5rem] mb-6'>
+                        <div class="flex-col relative z-40 text-white text-lg hidden group-hover:flex transition md:pt-16">
+                            <ul class='list-disc space-y-1 pl-4 leading-[1.5rem] mb-6 md:text-sm'>
                                 {!! $item['description'] !!}
                             </ul>
-                            <a href="" class="w-full py-4 rounded-[26px] bg-white text-center leading-none text-azure-600">Запросить консультацию</a>
+                            <a href="" class="w-full py-4 rounded-[26px] md:leading-3 bg-white font-semibold text-center leading-none text-azure-600 md:text-sm">Запросить консультацию</a>
                         </div>
                     </article>
                 @endforeach
