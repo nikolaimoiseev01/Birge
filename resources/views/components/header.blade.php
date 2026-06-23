@@ -57,7 +57,7 @@
             <nav
                 :class="isHome ? 'text-white' : 'text-azure-500'"
                 x-data="{ hovered: null }"
-                class="flex items-center font-semibold gap-10 lg:hidden"
+                class="flex items-center  gap-10 lg:hidden"
             >
                 @foreach($menu as $item)
                     <a
@@ -120,7 +120,7 @@
                         <button
                             type="button"
                             @click="lang = 'Kz'; open = false"
-                            class="text-left text-base font-semibold transition hover:text-[#8dd5c2]"
+                            class="text-left text-base font-medium transition hover:text-[#8dd5c2]"
                         >
                             Kz
                         </button>
@@ -128,7 +128,7 @@
                         <button
                             type="button"
                             @click="lang = 'En'; open = false"
-                            class="text-left text-base font-semibold transition hover:text-[#8dd5c2]"
+                            class="text-left text-base font-medium transition hover:text-[#8dd5c2]"
                         >
                             En
                         </button>
@@ -184,7 +184,7 @@
                 <span class="absolute left-1/2 top-1/2 block h-[2px] w-8 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-azure-500"></span>
             </button>
 
-            <nav class="mt-16 flex flex-col gap-8 text-[22px] font-semibold leading-none">
+            <nav class="mt-16 flex flex-col gap-8 text-[22px] font-medium leading-none">
                 @foreach($menu as $item)
                     <a
                         href="{{ $item['href'] }}"

@@ -8,7 +8,7 @@
     id="contacts"
     class="relative z-40 px-6 pt-[10px] md:pt-10 pb-10 sm:px-4"
 >
-    <div class="mx-auto flex md:flex-col container gap-12 lg:grid-cols-1 relative z-40">
+    <div class="mx-auto flex md:flex-col container gap-12 lg:grid-cols-1 relative z-40 font-light">
         <div class=" md:order-2">
             <x-logo class="w-[140px] md:w-16"/>
         </div>
@@ -57,9 +57,9 @@
                     Адрес в России
                 </p>
 
-                <p :class="isHome ? 'text-white/70' : 'text-black'" class="mt-3 max-w-sm leading-relaxed ">
-                    115035, Россия, г. Москва, Муниципальный Округ Якиманка,
-                    Набережная Кадашевская, д. 26
+                <p :class="isHome ? 'text-white' : 'text-black'" class="mt-3 leading-tight">
+                    115035, Россия, г. Москва, Муниципальный Округ<br>
+                    Якиманка, Набережная Кадашевская, д. 26
                 </p>
             </div>
 
@@ -73,7 +73,7 @@
 
                 <a
                     href="mailto:info@birgeteam.com"
-                    :class="isHome ? 'text-white/70' : 'text-black'"
+                    :class="isHome ? 'text-white' : 'text-black'"
                     class="mt-3 inline transition hover:text-azure-400"
                 >
                     info@birgeteam.com
@@ -89,10 +89,10 @@
                 </p>
 
                 <p
-                    :class="isHome ? 'text-white/70' : 'text-black'"
-                    class="mt-3 max-w-sm leading-relaxed ">
-                    050022, Казахстан, город Алматы,
-                    улица Амангельды, здание 70, 5 этаж
+                    :class="isHome ? 'text-white' : 'text-black'"
+                    class="mt-3 leading-tight ">
+                    050022, Казахстан, город Алматы, улица <br>
+                    Амангельды, здание 70, 5 этаж
                 </p>
             </div>
         </div>

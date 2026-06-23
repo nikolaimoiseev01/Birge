@@ -1,10 +1,10 @@
 <section class="flex items-center min-h-screen text-white md:pb-14 sm:px-4">
     <div
-        class="mx-auto grid container grid-cols-[1.35fr_.65fr] gap-16 transition-all lg:grid-cols-1 lg:gap-10 lg:mt-32 md:w-full">
+        class="mx-auto flex justify-between container gap-16 transition-all lg:grid-cols-1 lg:gap-10 lg:mt-32 md:w-full">
         <div
             x-data="revealOnScroll(100)"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-            class="transition-all duration-900 ease-out z-20 mx-auto"
+            class="transition-all duration-900 ease-out z-20 max-w-[883px]"
         >
             <h1 class="text-white min-w-max leading-[55px] lg:leading-none md:!leading-tight xl:!min-w-0 mb-16">
                 Команда профессионалов в области<br class="md:hidden">
@@ -27,7 +27,7 @@
                                 fill="#DEFEC0"/>
                         </svg>
                         <div>
-                            <p class="text-xl md:text-sm font-semibold leading-tight text-mint-500">
+                            <p class="text-xl md:text-sm font-medium leading-tight text-mint-500">
                                 {{ $item['title'] }}
                             </p>
                             <p class="mt-1 leading-relaxed text-white md:text-sm">
@@ -42,8 +42,9 @@
 
         </div>
 
-        <article
-            x-data="{
+        <div class="flex justify-end lg:justify-start">
+            <article
+                x-data="{
         shown: false,
         hover: false,
         x: 0,
@@ -60,53 +61,54 @@ move(e) {
     this.y = e.clientY - rect.top
 }
     }"
-            x-cloak
-            @click="$refs.link.click()"
-            @mouseenter="hover = true; move($event)"
-            @mouseleave="hover = false"
-            @mousemove="move($event)"
-            :class="shown ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'"
-            class="relative z-20 -bottom-20 md:bottom-auto md:!min-w-0 self-end max-w-[350px] min-w-[350px]
+                x-cloak
+                @click="$refs.link.click()"
+                @mouseenter="hover = true; move($event)"
+                @mouseleave="hover = false"
+                @mousemove="move($event)"
+                :class="shown ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'"
+                class="relative z-20 -bottom-20 md:bottom-auto md:!min-w-0 self-end max-w-[350px] min-w-[350px]
            flex flex-col gap-4 rounded-lg border border-white bg-mint-500/10
            p-4 backdrop-blur transition-all duration-1000 ease-out
            lg:max-w-md overflow-hidden hover:cursor-none"
-        >
-            <a
-                href="{{ route('portal.article', $firstArticle->slug) }}"
-                wire:navigate
-                x-ref="link"
-                :style="`transform: translate(${x}px, ${y}px) translate(-50%, -50%)`"
-                :class="hover ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
-                class="absolute left-0 top-0 z-30
+            >
+                <a
+                    href="{{ route('portal.article', $firstArticle->slug) }}"
+                    wire:navigate
+                    x-ref="link"
+                    :style="`transform: translate(${x}px, ${y}px) translate(-50%, -50%)`"
+                    :class="hover ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
+                    class="absolute left-0 top-0 z-30
            px-5 py-3 rounded-full bg-azure-500 text-white whitespace-nowrap
            pointer-events-none
            transition-[transform,opacity,scale]
            duration-75 ease-out"
-            >
-                Читать статью
-            </a>
-            <div class="aspect-[16/10] overflow-hidden bg-white/10 rounded-lg">
-                <img
-                    src="{{ $firstArticle->getFirstMediaUrl('cover') }}"
-                    alt=""
-                    class="h-full w-full object-cover"
                 >
-            </div>
+                    Читать статью
+                </a>
+                <div class="aspect-[16/10] overflow-hidden bg-white/10 rounded-lg">
+                    <img
+                        src="{{ $firstArticle->getFirstMediaUrl('cover') }}"
+                        alt=""
+                        class="h-full w-full object-cover"
+                    >
+                </div>
 
-            <h2 class="text-[22px] md:!text-[17px] font-semibold leading-tight line-clamp-4">
-                {{ $firstArticle->title }}
-            </h2>
+                <h2 class="text-[22px] md:!text-[17px] font-medium leading-tight line-clamp-4">
+                    {{ $firstArticle->title }}
+                </h2>
 
-            <p class="leading-relaxed text-white line-clamp-4">
-                {{ $firstArticle->description }}
-            </p>
+                <p class="leading-relaxed text-white line-clamp-4">
+                    {{ $firstArticle->description }}
+                </p>
 
-            <a
-                href="{{ route('portal.article', $firstArticle->slug) }}"
-                class="hidden md:block text-white underline text-sm"
-            >
-                Читать статью
-            </a>
-        </article>
+                <a
+                    href="{{ route('portal.article', $firstArticle->slug) }}"
+                    class="hidden md:block text-white underline text-sm"
+                >
+                    Читать статью
+                </a>
+            </article>
+        </div>
     </div>
 </section>

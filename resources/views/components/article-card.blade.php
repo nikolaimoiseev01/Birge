@@ -23,7 +23,7 @@
                         class="mx-auto py-4 text-sm text-center {{$classes['category']}} uppercase w-fit md:text-[11px] md:mb-3">
                     {{ $article->category->name }}/{{ $article['date'] }}
                 </span>
-        <h3 class="{{$classes['text']}} text-[22px] font-semibold mb-2 max-w-[443px] line-clamp-2 md:text-[17px] md:mb-3 md:mt-3">
+        <h3 class="{{$classes['text']}} text-[22px] font-medium mb-2 max-w-[443px] line-clamp-2 md:text-[17px] md:mb-3 md:mt-3">
             {{$article['title']}}
         </h3>
         <p class="{{$classes['text']}} line-clamp-3 md:text-sm">{{$article['description']}}</p>

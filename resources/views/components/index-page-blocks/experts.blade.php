@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="min-h-[190px] md:min-h-[153px] max-w-[328px] md:max-w-[280px] bg-azure-500/10 p-4 flex flex-col">
-                            <h3 class="text-[22px] md:text-[17px] font-semibold leading-tight">
+                            <h3 class="text-[22px] md:text-[17px] font-medium leading-tight">
                                 {{ $expert->name }}
                             </h3>
 

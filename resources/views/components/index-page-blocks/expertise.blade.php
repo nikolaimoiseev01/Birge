@@ -55,7 +55,7 @@
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.1_hover.svg" class="absolute {{$item['bg-class']}} opacity-0 transition group-hover:opacity-100" alt="">
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.2_hover.svg" class="absolute {{$item['bg-class']}} opacity-0 transition group-hover:opacity-100" alt="">
                         <button
-                            class="gradient-border-cirle absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#D3DCCB]">
+                            class="gradient-border-cirle absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-mint-800/10">
                             <img src="/fixed/plus.svg" alt="" class="transition group-hover:hidden">
                             <svg class="transition hidden group-hover:block" width="24" height="2" viewBox="0 0 24 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect y="2" width="2" height="24" transform="rotate(-90 0 2)" fill="white"/>
@@ -70,7 +70,7 @@
                             <ul class='list-disc space-y-1 pl-4 leading-[1.5rem] mb-6 md:text-sm'>
                                 {!! $item['description'] !!}
                             </ul>
-                            <a href="" class="w-full py-4 rounded-[26px] md:leading-3 bg-white font-semibold text-center leading-none text-azure-600 md:text-sm">Запросить консультацию</a>
+                            <a href="" class="w-full py-4 rounded-[26px] md:leading-3 bg-white font-medium text-center leading-none text-azure-600 md:text-sm">Запросить консультацию</a>
                         </div>
                     </article>
                 @endforeach

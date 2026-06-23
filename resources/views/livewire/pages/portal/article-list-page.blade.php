@@ -58,7 +58,7 @@
                     :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
                     @endif
                     @class([
-                        'font-semibold text-nowrap lg:py-2 leading-none py-3 border-gradient relative z-40 !rounded-3xl p-5 transition-all duration-700 ease-out',
+                        'font-medium text-nowrap lg:py-2 leading-none py-3 border-gradient relative z-40 !rounded-3xl p-5 transition-all duration-700 ease-out',
                         'bg-bright-40 text-azure-400' => $item['active'],
                         'bg-white/5 hover:bg-white/10 text-white' => !$item['active'],
                     ])
@@ -73,7 +73,7 @@
             <button
                 type="button"
                 @click="open = !open"
-                class="border-gradient relative z-40 flex w-full text-sm items-center justify-between bg-white/5 px-5 py-4 md:py-3 font-semibold text-white !rounded-3xl"
+                class="border-gradient relative z-40 flex w-full text-sm items-center justify-between bg-white/5 px-5 py-4 md:py-3 font-medium text-white !rounded-3xl"
             >
                 <span class="text-nowrap">{{ $activeTitle }}</span>
 
@@ -113,7 +113,7 @@
                         <button
                             type="button"
                             @class([
-                                'block w-full rounded-2xl py-[10px] text-left font-semibold transition',
+                                'block w-full rounded-2xl py-[10px] text-left font-medium transition',
                                 'text-mint-600' => $item['active'],
                                 'text-azure-500' => !$item['active'],
                             ])

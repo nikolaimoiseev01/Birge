@@ -63,7 +63,7 @@
                         {{ $article['date'] }}
                     </time>
 
-                    <h3 class="line-clamp-2 text-2xl font-semibold md:text-[17px] leading-tight tracking-[-0.03em] text-azure-600">
+                    <h3 class="line-clamp-2 text-2xl font-medium md:text-[17px] leading-tight tracking-[-0.03em] text-azure-600">
                         {{ $article['title'] }}
                     </h3>
 

@@ -42,9 +42,9 @@
             items-center
             justify-center
             rounded-full
-            px-5
+            px-8
             py-4
-            font-semibold
+            font-medium
             leading-none
             overflow-hidden
             transition-all
@@ -83,12 +83,12 @@
             </span>
         @endisset
 
-        <span class="relative block h-[1em] overflow-hidden leading-none">
-            <span class="block whitespace-nowrap" aria-label="{{ $text }}">
+        <span class="relative block h-[1em] overflow-hidden leading-none pr-[0.12em]">
+            <span class="block whitespace-nowrap pr-[0.04em]" aria-label="{{ $text }}">
                 @foreach($letters as $i => $letter)
                     <span
                         aria-hidden="true"
-                        class="inline-block will-change-transform [backface-visibility:hidden] transform-gpu"
+                        class="inline-block mr-[-0.04em] will-change-transform [backface-visibility:hidden] transform-gpu"
                         :class="[
                             ready ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]' : '!transition-none',
                             active ? '-translate-y-full' : 'translate-y-0'
@@ -98,10 +98,10 @@
                 @endforeach
             </span>
 
-            <span class="absolute left-0 top-0 block whitespace-nowrap" aria-hidden="true">
+            <span class="absolute left-0 top-0 block whitespace-nowrap pr-[0.04em]" aria-hidden="true">
                 @foreach($letters as $i => $letter)
                     <span
-                        class="inline-block will-change-transform [backface-visibility:hidden] transform-gpu"
+                        class="inline-block mr-[-0.04em] will-change-transform [backface-visibility:hidden] transform-gpu"
                         :class="[
                             ready ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]' : '!transition-none',
                             active ? 'translate-y-0' : 'translate-y-full'
