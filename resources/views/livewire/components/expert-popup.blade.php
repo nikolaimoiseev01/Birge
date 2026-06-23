@@ -17,7 +17,7 @@
     >
         <button
             @click="close()"
-            class="gradient-border-cirle md:fixed absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-mint-900/10 transition hover:bg-mint-900/20">
+            class="gradient-border-cirle z-50 md:fixed absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-mint-900/10 transition hover:bg-mint-900/20">
             <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="7.77734" y="9.19249" width="2" height="24" transform="rotate(-45 7.77734 9.19249)" fill="#295A57"/>
                 <rect x="9.19141" y="26.1627" width="2" height="24" transform="rotate(-135 9.19141 26.1627)" fill="#295A57"/>
