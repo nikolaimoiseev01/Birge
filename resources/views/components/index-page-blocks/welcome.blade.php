@@ -6,7 +6,7 @@
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
             class="transition-all duration-900 ease-out z-20 mx-auto"
         >
-            <h1 class="text-white min-w-max leading-[60px] lg:leading-none md:!leading-tight xl:!min-w-0 mb-16">
+            <h1 class="text-white min-w-max leading-[55px] lg:leading-none md:!leading-tight xl:!min-w-0 mb-16">
                 Команда профессионалов в области<br class="md:hidden">
                 организационного дизайна,<br class="md:hidden">
                 вознаграждения и формирования<br>
