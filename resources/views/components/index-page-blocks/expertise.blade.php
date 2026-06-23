@@ -1,4 +1,4 @@
-<section id="about" class="h-screen md:h-auto services-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
+<section id="about" class="h-screen md:h-auto about-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
     <style>
         .gradient-border-cirle {
             border-radius: 9999px;
@@ -42,9 +42,9 @@
         <div
             x-data="revealOnScroll(150)"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-            class="services-viewport overflow-visible transition-all duration-700 ease-out"
+            class="about-viewport overflow-visible transition-all duration-700 ease-out"
         >
-            <div class="services-track flex md:flex-col gap-4 will-change-transform">
+            <div class="about-track flex md:flex-col gap-4 will-change-transform">
                 @foreach($expertise as $key => $item)
                     <article
                         class="@if($loop->even) mt-10 md:mt-0 @endif p-6 birge-soft-card relative flex h-[520px] w-[520px] md:w-full md:min-w-0 md:min-h-[328px] md:h-auto min-w-[520px] flex-col justify-end rounded-lg bg-[#D3DCCB] group hover:bg-mint-800"
@@ -84,8 +84,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             gsap.registerPlugin(ScrollTrigger);
 
-            const section = document.querySelector('#services');
-            const track = section.querySelector('.services-track');
+            const section = document.querySelector('#about');
+            const track = section.querySelector('.about-track');
 
             const container = section.querySelector('.container');
 
