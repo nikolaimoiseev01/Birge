@@ -42,28 +42,30 @@
             items-center
             justify-center
             rounded-full
-            px-8
-            py-4
-            font-medium
+            font-semibold
             leading-none
             overflow-hidden
             transition-all
             duration-300
-            hover:scale-[1.02]
             hover:shadow-[0_10px_40px_rgba(0,0,0,.15)]
             {$gradient}
         "
     ]) }}
 >
-    <span class="relative flex h-[1em] items-center overflow-hidden leading-none tracking-[-0.08em] pr-[0.12em]">
+<span class="relative flex h-[1.25em] items-center overflow-hidden leading-none">
 
         @isset($icon)
-            <span class="relative mr-[10px] block h-[1em] overflow-hidden leading-none tracking-normal shrink-0">
+            <span class="relative mr-[10px] block h-[1em] overflow-hidden shrink-0">
+
                 <span
-                    class="block will-change-transform [backface-visibility:hidden] transform-gpu"
+                    class="block transform-gpu will-change-transform"
                     :class="[
-                        ready ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]' : '!transition-none',
-                        active ? '-translate-y-full' : 'translate-y-0'
+                        ready
+                            ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]'
+                            : '!transition-none',
+                        active
+                            ? '-translate-y-[120%]'
+                            : 'translate-y-0'
                     ]"
                     style="transition-delay: {{ $iconDelay }}ms"
                 >
@@ -71,45 +73,67 @@
                 </span>
 
                 <span
-                    class="absolute left-0 top-0 block will-change-transform [backface-visibility:hidden] transform-gpu"
+                    class="absolute inset-0 transform-gpu will-change-transform"
                     :class="[
-                        ready ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]' : '!transition-none',
-                        active ? 'translate-y-0' : 'translate-y-full'
+                        ready
+                            ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]'
+                            : '!transition-none',
+                        active
+                            ? 'translate-y-0'
+                            : 'translate-y-[120%]'
                     ]"
                     style="transition-delay: {{ $iconDelay }}ms"
                 >
                     {{ $icon }}
                 </span>
+
             </span>
         @endisset
 
-        <span class="relative block h-[1em] overflow-hidden leading-none pr-[0.12em]">
-            <span class="block whitespace-nowrap pr-[0.04em]" aria-label="{{ $text }}">
+        <span class="relative block h-[1em] overflow-hidden leading-none pr-[0.14em]">
+
+            <span
+                class="block whitespace-nowrap tracking-[-0.1em]"
+                aria-label="{{ $text }}"
+            >
                 @foreach($letters as $i => $letter)
                     <span
                         aria-hidden="true"
-                        class="inline-block mr-[-0.04em] will-change-transform [backface-visibility:hidden] transform-gpu"
+                        class="inline-block transform-gpu will-change-transform"
                         :class="[
-                            ready ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]' : '!transition-none',
-                            active ? '-translate-y-full' : 'translate-y-0'
+                            ready
+                                ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]'
+                                : '!transition-none',
+                            active
+                                ? '-translate-y-[120%]'
+                                : 'translate-y-0'
                         ]"
                         style="transition-delay: {{ ($i + $textDelayOffset) * $delay }}ms"
                     >{!! $letter === ' ' ? '&nbsp;' : e($letter) !!}</span>
                 @endforeach
             </span>
 
-            <span class="absolute left-0 top-0 block whitespace-nowrap pr-[0.04em]" aria-hidden="true">
+            <span
+                class="absolute inset-0 block whitespace-nowrap tracking-[-0.1em]"
+                aria-hidden="true"
+            >
                 @foreach($letters as $i => $letter)
                     <span
-                        class="inline-block mr-[-0.04em] will-change-transform [backface-visibility:hidden] transform-gpu"
+                        class="inline-block transform-gpu will-change-transform"
                         :class="[
-                            ready ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]' : '!transition-none',
-                            active ? 'translate-y-0' : 'translate-y-full'
+                            ready
+                                ? 'transition-transform duration-[{{ $duration }}ms] ease-[cubic-bezier(.22,1,.36,1)]'
+                                : '!transition-none',
+                            active
+                                ? 'translate-y-0'
+                                : 'translate-y-[120%]'
                         ]"
                         style="transition-delay: {{ ($i + $textDelayOffset) * $delay }}ms"
                     >{!! $letter === ' ' ? '&nbsp;' : e($letter) !!}</span>
                 @endforeach
             </span>
+
         </span>
+
     </span>
 </a>

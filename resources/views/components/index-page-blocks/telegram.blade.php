@@ -1,4 +1,4 @@
-<section id="platform" class=" birge-bg  pt-[90px] pb-[22px] text-white sm:px-4 relative">
+<section id="platform" class="pt-[90px] text-white sm:px-4 relative">
     <div class="mx-auto container">
         <div
             x-data="revealOnScroll()"
@@ -9,7 +9,7 @@
                 Наш Telegram-канал
             </h2>
 
-            <x-Ui.link :navigate="false" href="https://t.me/birge_team" target="_blank" type="mint" class="md:hidden !text-azure-500 fill-azure-500 z-40 relative">
+            <x-Ui.link :navigate="false" href="https://t.me/birge_team" target="_blank" type="mint" class=" px-8 py-4 md:hidden !text-azure-500 fill-azure-500 z-40 relative">
                 <x-slot:icon>
                     <svg class="" width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99868 17.4867L9.98853 17.4886L9.92299 17.5209L9.90453 17.5246L9.89161 17.5209L9.82608 17.4886C9.81623 17.4855 9.80885 17.487 9.80392 17.4932L9.80023 17.5024L9.78454 17.8975L9.78916 17.9159L9.79839 17.9279L9.89438 17.9962L9.90822 17.9999L9.9193 17.9962L10.0153 17.9279L10.0264 17.9131L10.0301 17.8975L10.0144 17.5033C10.0119 17.4935 10.0067 17.4879 9.99868 17.4867ZM10.2433 17.3824L10.2313 17.3843L10.0605 17.4701L10.0513 17.4793L10.0485 17.4895L10.0651 17.8864L10.0698 17.8975L10.0771 17.9039L10.2627 17.9898C10.2744 17.9928 10.2833 17.9904 10.2894 17.9824L10.2931 17.9695L10.2617 17.4027C10.2587 17.3916 10.2525 17.3849 10.2433 17.3824ZM9.58333 17.3843C9.57926 17.3818 9.5744 17.381 9.56975 17.382C9.56511 17.3831 9.56105 17.3858 9.5584 17.3898L9.55287 17.4027L9.52148 17.9695C9.5221 17.9805 9.52733 17.9879 9.53718 17.9916L9.55102 17.9898L9.73654 17.9039L9.74578 17.8965L9.74947 17.8864L9.76516 17.4895L9.76239 17.4784L9.75316 17.4692L9.58333 17.3843Z" fill="#112E3B"/>
@@ -21,7 +21,7 @@
             </x-Ui.link>
         </div>
 
-        <div class=" border-b border-bright-40/40 grid grid-cols-3 gap-3 lg:grid-cols-2 md:!grid-cols-1  pb-[180px] md:pb-[80px]">
+        <div id="card-vertical-slider" class=" border-b border-bright-40/40 grid grid-cols-3 gap-3 lg:grid-cols-2 md:!grid-cols-1  pb-[180px] md:pb-[80px]">
             @foreach($telegramPosts as $i => $post)
                 <article
                     x-data="{
@@ -44,7 +44,7 @@
                     @mouseleave="hover = false"
                     @mousemove="move($event)"
                     :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                    class="cursor-pointer hover:cursor-none border-gradient min-h-[120px] md:min-h-[149px]
+                    class="{{ $i >= 3 ? 'md:hidden' : '' }} cursor-pointer hover:cursor-none border-gradient min-h-[165px] md:min-h-[149px]
            flex group flex-col relative z-40 justify-between rounded-lg bg-white/5 p-5
            transition-all duration-700 ease-out hover:bg-white/10 overflow-hidden"
                 >
@@ -63,8 +63,8 @@
                         Читать статью
                     </a>
 
-                    <h3 class="text-xl font-light leading-tight z-40 md:text-base">
-                        {{ $post['title'] }}
+                    <h3 class="text-xl z-40 md:text-base leading-[120%] font-normal">
+                        {!! $post['title'] !!}
                     </h3>
 
                     <p class="mt-5 text-base font-light text-white/60 md:text-sm">
@@ -72,7 +72,7 @@
                     </p>
                 </article>
             @endforeach
-                <x-Ui.link :navigate="false" href="https://t.me/birge_team" target="_blank" type="mint" class="hidden md:flex mt-6 md:block w-full !text-azure-500 fill-azure-500 z-40 relative">
+                <x-Ui.link :navigate="false" href="https://t.me/birge_team" target="_blank" type="mint" class="text-center hidden mt-6 py-4 md:block md:flex w-full !text-azure-500 fill-azure-500 z-40 relative">
                     <x-slot:icon>
                         <svg class="mr-[10px]" width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99868 17.4867L9.98853 17.4886L9.92299 17.5209L9.90453 17.5246L9.89161 17.5209L9.82608 17.4886C9.81623 17.4855 9.80885 17.487 9.80392 17.4932L9.80023 17.5024L9.78454 17.8975L9.78916 17.9159L9.79839 17.9279L9.89438 17.9962L9.90822 17.9999L9.9193 17.9962L10.0153 17.9279L10.0264 17.9131L10.0301 17.8975L10.0144 17.5033C10.0119 17.4935 10.0067 17.4879 9.99868 17.4867ZM10.2433 17.3824L10.2313 17.3843L10.0605 17.4701L10.0513 17.4793L10.0485 17.4895L10.0651 17.8864L10.0698 17.8975L10.0771 17.9039L10.2627 17.9898C10.2744 17.9928 10.2833 17.9904 10.2894 17.9824L10.2931 17.9695L10.2617 17.4027C10.2587 17.3916 10.2525 17.3849 10.2433 17.3824ZM9.58333 17.3843C9.57926 17.3818 9.5744 17.381 9.56975 17.382C9.56511 17.3831 9.56105 17.3858 9.5584 17.3898L9.55287 17.4027L9.52148 17.9695C9.5221 17.9805 9.52733 17.9879 9.53718 17.9916L9.55102 17.9898L9.73654 17.9039L9.74578 17.8965L9.74947 17.8864L9.76516 17.4895L9.76239 17.4784L9.75316 17.4692L9.58333 17.3843Z" fill="#112E3B"/>

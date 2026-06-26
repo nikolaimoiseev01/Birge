@@ -1,14 +1,29 @@
-<section id="about" class="h-screen md:h-auto about-section overflow-hidden bg-mint-200 py-16 sm:px-4 relative z-40">
+<style>
+    .about-hidden {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+</style>
+
+<section id="about" class="h-screen md:h-auto about-section overflow-hidden bg-transparent py-16 sm:px-4 relative z-40 ">
     <style>
-        .gradient-border-cirle {
+        .gradient-border-circle-about {
             border-radius: 9999px;
         }
 
-        .gradient-border-cirle::before {
+        .group:hover .gradient-border-circle-about::before {
+            background: linear-gradient(
+                135deg,
+                rgb(255, 255, 255) 0%,
+                rgba(255, 255, 255, 0) 100%
+            );
+        }
+
+        .gradient-border-circle-about::before {
             content: "";
             position: absolute;
             inset: 0;
-            padding: 1px;
+            padding: 1.5px;
             border-radius: inherit;
 
             background: linear-gradient(
@@ -46,8 +61,24 @@
         >
             <div class="about-track flex md:flex-col gap-4 will-change-transform">
                 @foreach($expertise as $key => $item)
+                    @php
+                        $subject = 'Обращение с сайта birgeteam.com';
+
+                        $body = "Добрый день!\n\n";
+                        $body .= "Меня зовут ..\n";
+                        $body .= "Компания ..\n\n";
+                        $body .= "Интересно узнать {$item['mail_title']}\n\n";
+                        $body .= "Свяжитесь со мной, пожалуйста, по номеру …";
+
+                        $mailto = 'mailto:info@birgeteam.com?subject='
+                            . rawurlencode($subject)
+                            . '&body='
+                            . rawurlencode(strip_tags($body));
+                    @endphp
+
+
                     <article
-                        class="@if($loop->even) mt-10 md:mt-0 @endif p-6 birge-soft-card relative flex h-[520px] w-[520px] md:w-full md:min-w-0 md:min-h-[328px] md:h-auto min-w-[520px] flex-col justify-end rounded-lg bg-[#D3DCCB] group hover:bg-mint-800"
+                        class="@if($loop->even) mt-10 md:mt-0 @endif p-6 md:p-4 birge-soft-card relative flex h-[520px] w-[520px] md:w-full md:min-w-0 md:min-h-[328px] md:h-auto min-w-[520px] aspect-square md:hover:aspect-auto flex-col justify-end rounded-lg bg-[#D3DCCB] group hover:bg-mint-800"
                     >
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.1.svg" class="absolute {{$item['bg-class']}} transition group-hover:opacity-0" alt="">
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.2.svg" class="absolute {{$item['bg-class']}} transition group-hover:opacity-0" alt="">
@@ -55,7 +86,7 @@
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.1_hover.svg" class="absolute {{$item['bg-class']}} opacity-0 transition group-hover:opacity-100" alt="">
                         <img src="/fixed/expertise/expertise-{{$key + 1}}.2_hover.svg" class="absolute {{$item['bg-class']}} opacity-0 transition group-hover:opacity-100" alt="">
                         <button
-                            class="gradient-border-cirle absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-mint-800/10">
+                                    class="gradient-border-circle-about absolute right-4 top-4 flex h-12 w-12 md:h-10 md:w-10 items-center justify-center rounded-full bg-mint-800/10">
                             <img src="/fixed/plus.svg" alt="" class="transition group-hover:hidden">
                             <svg class="transition hidden group-hover:block" width="24" height="2" viewBox="0 0 24 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect y="2" width="2" height="24" transform="rotate(-90 0 2)" fill="white"/>
@@ -63,14 +94,21 @@
 
                         </button>
 
-                        <h3 class="max-w-sm text-4xl min-w-full font-medium text-[#295A57] md:text-xl relative z-20 group-hover:hidden transition">
+                        <h3 class="max-w-sm text-4xl min-w-full leading-[110%] font-medium text-mint-900 md:text-xl relative md:leading-[110%] z-20 group-hover:hidden transition">
                             {!! $item['title'] !!}
                         </h3>
                         <div class="flex-col relative z-40 text-white text-lg hidden group-hover:flex transition md:pt-16">
-                            <ul class='list-disc space-y-1 pl-4 leading-[1.5rem] mb-6 md:text-sm'>
+                            <ul class='list-disc space-y-4 pl-4 leading-[110%] md:leading-[110%]  mb-6 md:text-sm'>
                                 {!! $item['description'] !!}
                             </ul>
-                            <a href="" class="w-full py-4 rounded-[26px] md:leading-3 bg-white font-medium text-center leading-none text-azure-600 md:text-sm">Запросить консультацию</a>
+
+                            <a
+                                href="{{ $mailto }}"
+                                class="w-full py-4 rounded-[26px] text-base leading-[100%] md:leading-3 bg-white font-medium text-center text-azure-600 md:text-sm"
+                            >
+                                Запросить консультацию
+                            </a>
+
                         </div>
                     </article>
                 @endforeach
@@ -78,36 +116,3 @@
         </div>
     </div>
 </section>
-
-@push('scripts')
-    <script type="module">
-        document.addEventListener('DOMContentLoaded', () => {
-            gsap.registerPlugin(ScrollTrigger);
-
-            const section = document.querySelector('#about');
-            const track = section.querySelector('.about-track');
-
-            const container = section.querySelector('.container');
-
-            const getScrollDistance = () => {
-                const containerRect = container.getBoundingClientRect();
-
-                return track.scrollWidth - containerRect.width;
-            };
-
-            gsap.to(track, {
-                x: () => -getScrollDistance(),
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top top',
-                    end: () => `+=${getScrollDistance()}`,
-                    scrub: true,
-                    pin: true,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true,
-                }
-            });
-        });
-    </script>
-@endpush

@@ -1,4 +1,4 @@
-<div class="container mx-auto flex max-w-7xl pt-10 mb-[180px] gap-8 md:mb-[80px]">
+<div class="container mx-auto flex max-w-7xl pt-10 mb-[180px] gap-8 md:mb-[80px] justify-between">
 
     <!-- Main Article -->
     <main class="w-2/3 space-y-12 lg:w-full">
@@ -20,14 +20,14 @@
     </main>
 
     <!-- Table of Contents -->
-    <aside class="w-1/3 lg:hidden">
-        <div class="sticky top-20 p-4 ">
-            <h3 class="text-azure-500/40 mb-4 border-t uppercase border-azure-500/20">Содержание</h3>
+    <aside class="max-w-[290px] lg:hidden">
+        <div class="sticky top-20 border-t border-azure-500/20">
+            <h3 class="text-azure-500/40 mb-4 pt-4 uppercase ">Содержание</h3>
             <nav class="space-y-2 mb-10">
                 @foreach($article['content'] as $topic)
                     <a href="#{{Str::slug($topic['title'])}}"
                        class="block hover:underline text-azure-500/40">
-                        {{$topic['title']}}
+                        {{$topic['title_content']}}
                     </a>
                 @endforeach
             </nav>

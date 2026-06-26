@@ -4,16 +4,17 @@
 
 <footer
     x-data="{ isHome: @js($isHome) }"
-    :class="isHome ? 'bg-azure-500 text-white' : 'bg-mint-200 text-azure-500'"
+    :class="isHome ? 'bg-transparent text-white' : 'bg-mint-200 text-azure-500'"
     id="contacts"
-    class="relative z-40 px-6 pt-[10px] md:pt-10 pb-10 sm:px-4"
+    class="relative z-40 px-6 pt-[10px] md:pt-10 pb-10 sm:px-4 z-auto"
 >
-    <div class="mx-auto flex md:flex-col container gap-12 lg:grid-cols-1 relative z-40 font-light">
+    <div class="absolute w-full h-full bg-azure-500 inset-0 z-[-1]"></div>
+    <div class="mx-auto flex md:flex-col container gap-12 lg:grid-cols-1 relative z-40 font-light md:gap-10">
         <div class=" md:order-2">
             <x-logo class="w-[140px] md:w-16"/>
         </div>
 
-        <div class="ml-auto grid grid-cols-[max-content_1fr] gap-x-[127px] gap-y-12 lg:grid-cols-1 lg:gap-x-0 lg:gap-y-10 md:order-1">
+        <div class="ml-auto grid grid-cols-[max-content_1fr] md:ml-0 gap-x-[127px] gap-y-12 lg:grid-cols-1 lg:gap-x-0 lg:gap-y-10 md:order-1">
             <!-- Социальные сети -->
             <div class="w-fit md:order-2">
                 <p
@@ -24,7 +25,7 @@
 
                 <div
 
-                    class="mt-3 flex gap-6">
+                    class="mt-3 md:mt-2 flex gap-6">
                     <a href="https://www.instagram.com/birge_team" class="group">
                         <svg
                             :class="isHome ? 'fill-white' : 'fill-azure-500'"
@@ -57,7 +58,7 @@
                     Адрес в России
                 </p>
 
-                <p :class="isHome ? 'text-white' : 'text-black'" class="mt-3 leading-tight">
+                <p :class="isHome ? 'text-white' : 'text-black'" class="mt-3 md:mt-2 leading-tight">
                     115035, Россия, г. Москва, Муниципальный Округ<br>
                     Якиманка, Набережная Кадашевская, д. 26
                 </p>
@@ -74,7 +75,7 @@
                 <a
                     href="mailto:info@birgeteam.com"
                     :class="isHome ? 'text-white' : 'text-black'"
-                    class="mt-3 inline transition hover:text-azure-400"
+                    class="mt-3 md:mt-2 inline transition hover:text-azure-400"
                 >
                     info@birgeteam.com
                 </a>
@@ -90,7 +91,7 @@
 
                 <p
                     :class="isHome ? 'text-white' : 'text-black'"
-                    class="mt-3 leading-tight ">
+                    class="mt-3 md:mt-2 leading-tight ">
                     050022, Казахстан, город Алматы, улица <br>
                     Амангельды, здание 70, 5 этаж
                 </p>

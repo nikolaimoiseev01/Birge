@@ -14,8 +14,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased flex flex-col min-h-screen">
-<x-preloader/>
+<body class="antialiased flex flex-col min-h-screen @stack('body-class')">
+{{--<x-preloader/>--}}
 <x-header/>
 {{ $slot }}
 <x-footer/>

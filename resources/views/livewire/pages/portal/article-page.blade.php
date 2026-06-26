@@ -47,7 +47,7 @@
 
                     <span
                         class="mx-auto  px-3 py-2 text-sm text-center text-azure-500/40 uppercase w-fit md:px-0 md:text-start md:mx-0">
-                    {{ $article->category->name }}/{{ $article['date'] }}
+                    {{ $article->category->name }} / {{ $article['date'] }}
                 </span>
                 </div>
 

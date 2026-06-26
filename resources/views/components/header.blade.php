@@ -67,7 +67,7 @@
                         @mouseleave="hovered = null"
                         :class="hovered && hovered !== '{{ $item['key'] }}' ? 'opacity-40' : 'opacity-100'"
                         @if(!empty($item['navigate'])) wire:navigate @endif
-                        class="{{ !empty($item['navigate']) ? 'js-page-transition' : '' }} transition-opacity duration-500"
+                        class="{{ !empty($item['navigate']) ? 'js-page-transition' : '' }} transition-opacity duration-500 font-semibold"
                     >
                         {{ $item['title'] }}
                     </a>
@@ -75,7 +75,7 @@
             </nav>
 
             <div class="flex items-center gap-8 lg:gap-5">
-                <x-Ui.link class="lg:hidden" type="teal">
+                <x-Ui.link class="lg:hidden px-4 py-3" type="teal">
                     Связаться с нами
                 </x-Ui.link>
 

@@ -1,6 +1,6 @@
-<section class="flex items-center min-h-screen text-white md:pb-14 sm:px-4">
+<section class="flex items-center min-h-screen text-white md:pb-0 sm:px-4 ">
     <div
-        class="mx-auto flex justify-between container gap-16 transition-all lg:grid-cols-1 lg:gap-10 lg:mt-32 md:w-full">
+        class="mx-auto flex justify-between container gap-16 transition-all lg:flex-col lg:gap-10 lg:mt-32 md:w-full">
         <div
             x-data="revealOnScroll(100)"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
@@ -30,7 +30,7 @@
                             <p class="text-xl md:text-sm font-medium leading-tight text-mint-500">
                                 {{ $item['title'] }}
                             </p>
-                            <p class="mt-1 leading-relaxed text-white md:text-sm">
+                            <p class="mt-px leading-relaxed text-white md:text-sm">
                                 {{ $item['text'] }}
                             </p>
                         </div>
@@ -38,38 +38,58 @@
                 @endforeach
             </div>
 
-            <x-Ui.link type="mint" class="px-8 py-4">Запросить консультацию</x-Ui.link>
+            <x-Ui.link type="mint" class="px-8 py-4 md:w-full">Запросить консультацию</x-Ui.link>
 
         </div>
 
         <div class="flex justify-end lg:justify-start">
             <article
                 x-data="{
-        shown: false,
-        hover: false,
-        x: 0,
-        y: 0,
+    shown: false,
+    hover: false,
+    expanded: false,
+    timer: null,
+    x: 0,
+    y: 0,
 
-        init() {
-            setTimeout(() => this.shown = true, 2000)
-        },
+    init() {
+        setTimeout(() => this.shown = true, 2000)
+    },
 
-move(e) {
-    const rect = this.$el.getBoundingClientRect()
+    move(e) {
+        const rect = this.$el.getBoundingClientRect()
+        this.x = e.clientX - rect.left
+        this.y = e.clientY - rect.top
+    },
 
-    this.x = e.clientX - rect.left
-    this.y = e.clientY - rect.top
-}
-    }"
+    enter(e) {
+        this.hover = true
+        this.move(e)
+
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+            this.expanded = true
+        }, 120)
+    },
+
+    leave() {
+        clearTimeout(this.timer)
+        this.expanded = false
+
+        setTimeout(() => {
+            this.hover = false
+        }, 250)
+    }
+}"
                 x-cloak
                 @click="$refs.link.click()"
-                @mouseenter="hover = true; move($event)"
-                @mouseleave="hover = false"
+                @mouseenter="enter($event)"
+                @mouseleave="leave()"
                 @mousemove="move($event)"
                 :class="shown ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'"
                 class="relative z-20 -bottom-20 md:bottom-auto md:!min-w-0 self-end max-w-[350px] min-w-[350px]
-           flex flex-col gap-4 rounded-lg border border-white bg-mint-500/10
-           p-4 backdrop-blur transition-all duration-1000 ease-out
+           flex flex-col gap-4 rounded-lg bg-mint-500/10
+           p-4 backdrop-blur transition-all duration-1000 border-gradient ease-out
            lg:max-w-md overflow-hidden hover:cursor-none"
             >
                 <a
@@ -77,14 +97,31 @@ move(e) {
                     wire:navigate
                     x-ref="link"
                     :style="`transform: translate(${x}px, ${y}px) translate(-50%, -50%)`"
-                    :class="hover ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
-                    class="absolute left-0 top-0 z-30
-           px-5 py-3 rounded-full bg-azure-500 text-white whitespace-nowrap
-           pointer-events-none
-           transition-[transform,opacity,scale]
-           duration-75 ease-out"
+                    class="absolute left-0 top-0 z-30 h-11 w-[170px]
+           pointer-events-none"
                 >
-                    Читать статью
+    <span
+        :class="hover ? 'opacity-100' : 'opacity-0'"
+        class="absolute left-1/2 top-1/2 h-11
+               -translate-x-1/2 -translate-y-1/2
+               rounded-full bg-azure-500
+               overflow-hidden
+               transition-opacity duration-150"
+    >
+        <span
+            :class="expanded ? 'w-[150px]' : 'w-0'"
+            class="flex h-full items-center justify-center
+                   overflow-hidden whitespace-nowrap
+                   transition-[width] duration-50 ease-out"
+        >
+            <span
+                :class="expanded ? 'opacity-100' : 'opacity-0'"
+                class="px-5 text-white transition-opacity duration-200 delay-150"
+            >
+                Читать статью
+            </span>
+        </span>
+    </span>
                 </a>
                 <div class="aspect-[16/10] overflow-hidden bg-white/10 rounded-lg">
                     <img
@@ -94,11 +131,11 @@ move(e) {
                     >
                 </div>
 
-                <h2 class="text-[22px] md:!text-[17px] font-medium leading-tight line-clamp-4">
+                <h2 class="text-[22px] md:!text-[17px] font-medium leading-[110%] line-clamp-4">
                     {{ $firstArticle->title }}
                 </h2>
 
-                <p class="leading-relaxed text-white line-clamp-4">
+                <p class="text-white line-clamp-4 leading-[130%]">
                     {{ $firstArticle->description }}
                 </p>
 

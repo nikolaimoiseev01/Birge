@@ -1,3 +1,7 @@
+@push('body-class')
+    bg-azure-500
+@endpush
+
 <section class="flex-1 container mt-32">
     <div class="fixed min-w-[100vw]">
         <img src="/fixed/welcome-vector-1.svg"

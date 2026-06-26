@@ -1,4 +1,4 @@
-<section id="team" class="bg-azure-500 py-[140px] text-white">
+<section id="team" class="team-section bg-transparent py-[140px] md:py-20 text-white bg-azure-500">
     <div class="mx-auto container">
         <div
             class="mb-9 flex items-center justify-between transition-all duration-700 ease-out"
@@ -7,16 +7,16 @@
                 Эксперты Birge
             </h2>
 
-            <div class="flex gap-2">
+            <div class="flex gap-2 md:hidden">
                 <button
-                    class="team-prev gradient-border-cirle flex h-12 w-12 items-center justify-center border-gradient !rounded-full bg-azure-500/10 hover hover:bg-azure-500/20 transition">
-                    <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    class="team-prev gradient-border-cirle flex h-12 w-12 items-center justify-center border-gradient !rounded-full !bg-bright-40/10 hover hover:!bg-bright-40/20 transition">
+                    <svg class="mr-1" width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.0146 19.9071L1.41465 10.3071L11.0146 0.707104" stroke="white" stroke-width="2"/>
                     </svg>
                 </button>
                 <button
-                    class="team-next gradient-border-cirle flex h-12 w-12 items-center justify-center border-gradient !rounded-full bg-azure-500/10 hover hover:bg-azure-500/20 transition">
-                    <svg width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    class="team-next gradient-border-cirle flex h-12 w-12 items-center justify-center border-gradient !rounded-full !bg-bright-40/10 hover hover:!bg-bright-40/20 transition">
+                    <svg class="ml-1" width="12" height="21" viewBox="0 0 12 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.707031 19.9071L10.307 10.3071L0.707031 0.707104" stroke="white" stroke-width="2"/>
                     </svg>
                 </button>
@@ -32,7 +32,7 @@
             <div class="swiper-wrapper">
                 @foreach($experts as $expert)
                     <article
-                        class="swiper-slide cursor-pointer overflow-hidden rounded max-w-[328px] md:max-w-[280px]"
+                        class="swiper-slide cursor-pointer overflow-hidden rounded-lg max-w-[328px] md:max-w-[280px]"
                         @click="$dispatch('open-expert', { id: {{ $expert->id }} })"
                     >
                         <div class="overflow-hidden rounded-lg h-[362px] w-[328px] md:w-[280px] md:h-[309px]">
@@ -44,12 +44,12 @@
                             >
                         </div>
 
-                        <div class="min-h-[190px] md:min-h-[153px] max-w-[328px] md:max-w-[280px] bg-azure-500/10 p-4 flex flex-col">
-                            <h3 class="text-[22px] md:text-[17px] font-medium leading-tight">
+                        <div class="min-h-[190px] md:min-h-[153px] max-w-[328px] md:max-w-[280px] bg-bright-40/10 p-4 pt-5 flex flex-col">
+                            <h3 class="text-[22px] md:text-[17px] font-semibold leading-tight">
                                 {{ $expert->name }}
                             </h3>
 
-                            <p class="mt-2 text-lg md:text-sm leading-snug text-white/60">
+                            <p class="mt-4 text-lg font-normal md:text-sm leading-[120%] text-white/60">
                                 {{ $expert->description_short }}
                             </p>
 

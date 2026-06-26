@@ -9,6 +9,12 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    safelist: [
+        'list-disc',
+        'pl-5',
+        'space-y-6',
+    ],
+
     theme: {
         extend: {
             fontFamily: {

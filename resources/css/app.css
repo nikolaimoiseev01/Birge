@@ -19,7 +19,7 @@ body::-webkit-scrollbar {
 }
 
 body {
-    @apply bg-azure-500;
+    @apply bg-mint-200;
 }
 
 p {
