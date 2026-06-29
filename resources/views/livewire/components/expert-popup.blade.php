@@ -31,19 +31,25 @@
                 <div class="grid min-h-screen grid-cols-[48%_52%] md:grid-cols-1">
                     <div class="relative flex flex-col border-r border-[#b6d8d0] md:border-r-0">
                         <div
-                            class="flex flex-1 items-center justify-center px-16 py-20 md:px-4 md:py-10 md:relative md:bottom-8">
+                            class="flex flex-1 items-center justify-center px-16 py-20 md:px-4 md:pt-48 md:relative md:bottom-8">
                             <div
                                 x-ref="targetImageBox"
                                 class="h-[530px] w-[480px] overflow-hidden rounded xl:h-[420px] xl:w-[420px] md:h-[360px] md:w-full"
-                            ></div>
+                            >
+                                <img
+                                    x-ref="staticImage"
+                                    class="h-full w-full object-cover opacity-0 transition-opacity duration-150"
+                                    alt=""
+                                >
+                            </div>
                         </div>
 
                         <div
-                            class="grid grid-cols-2 border-t border-[#b6d8d0] md:fixed md:bottom-0 md:w-full md:bg-[#eef6ea]">
+                            class="grid grid-cols-2 border-t border-[#b6d8d0] md:fixed md:bottom-0 md:w-full md:bg-[#eef6ea] z-[99]">
                             <button
                                 type="button"
                                 @click="change('prev')"
-                                class="flex items-center justify-center min-h-[124px] border-r border-[#b6d8d0] text-5xl font-light transition hover:bg-bright-600"
+                                class="flex items-center justify-center min-h-[124px] md:min-h-[90px] border-r border-[#b6d8d0] text-5xl font-light transition hover:bg-bright-600"
                             >
                                 <svg width="50" height="19" viewBox="0 0 50 19" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +63,7 @@
                             <button
                                 type="button"
                                 @click="change('next')"
-                                class="flex items-center min-h-[124px] justify-center text-5xl font-light transition hover:bg-bright-600"
+                                class="flex items-center min-h-[124px] md:min-h-[90px] justify-center text-5xl font-light transition hover:bg-bright-600"
                             >
                                 <svg width="50" height="19" viewBox="0 0 50 19" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -72,14 +78,14 @@
 
                     <div class="flex items-center px-20 pb-20 md:px-4 md:py-10 bg-bright-500">
                         <div
-                            class="flex h-[530px] w-full items-center  xl:h-[420px] md:h-auto md:min-h-[360px] flex-col"
+                            class="flex h-[530px] w-full items-center  xl:h-[420px] md:!h-auto md:min-h-[360px] flex-col"
                             x-show="contentVisible"
                             x-transition:enter="transition duration-700 delay-50 ease-out"
                             x-transition:enter-start="translate-y-8 opacity-0"
                             x-transition:enter-end="translate-y-0 opacity-100"
                         >
                             @if($expert)
-                                <div class=" md:px-0 mr-auto">
+                                <div class=" md:px-0 mr-auto md:pb-[110px]">
                                     <h2 class="mb-6 text-mint-900">
                                         {{ $expert->name }}
                                     </h2>
@@ -151,6 +157,11 @@
         },
 
         async open(id) {
+            if (this.$refs.staticImage) {
+                this.$refs.staticImage.src = '';
+                this.$refs.staticImage.style.opacity = '0';
+            }
+
             this.isClosing = false;
             this.currentId = id;
 
@@ -188,6 +199,15 @@
             `;
 
                 this.setFlyingImageRect(to);
+                setTimeout(() => {
+                    if (window.innerWidth < 768) {
+                        this.$refs.staticImage.src = sourceImage.src;
+                        this.$refs.staticImage.style.opacity = '1';
+
+                        flying.style.transition = 'none';
+                        flying.style.opacity = '0';
+                    }
+                }, this.duration);
             });
 
             await this.$wire.loadExpert(id);
@@ -224,9 +244,12 @@
             this.contentVisible = false;
 
             const flying = this.$refs.flyingImage;
+            const isMobile = window.innerWidth < 768;
 
-            flying.style.transition = 'opacity 300ms ease-in-out';
-            flying.style.opacity = '0';
+            if (!isMobile) {
+                flying.style.transition = 'opacity 300ms ease-in-out';
+                flying.style.opacity = '0';
+            }
 
             await new Promise(resolve => setTimeout(resolve, 30));
 
@@ -237,6 +260,27 @@
             await this.$nextTick();
 
             this.currentId = result.id;
+
+            if (isMobile && result.imageUrl) {
+                this.$refs.staticImage.style.opacity = '0';
+
+                requestAnimationFrame(() => {
+                    this.$refs.staticImage.src = result.imageUrl;
+
+                    requestAnimationFrame(() => {
+                        this.$refs.staticImage.style.opacity = '1';
+                    });
+                });
+
+                flying.style.transition = 'none';
+                flying.style.opacity = '0';
+
+                setTimeout(() => {
+                    this.contentVisible = true;
+                }, 150);
+
+                return;
+            }
 
             if (result.imageUrl) {
                 flying.src = result.imageUrl;
