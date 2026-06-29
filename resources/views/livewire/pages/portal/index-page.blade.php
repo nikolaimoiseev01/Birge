@@ -70,13 +70,28 @@
         <div class="telegram-bg absolute md:hidden inset-0 z-0 bg-azure-500"></div>
 
         <div class="telegram-vectors fixed inset-0 z-10 pointer-events-none opacity-0">
-            <img src="/fixed/welcome-vector-1.svg"
-                 class="absolute left-[56%] top-0 -translate-x-1/2 blur-[200px]"
-                 alt="">
+            <div class="absolute md:hidden left-0 top-0 md:right-0 md:left-auto w-full h-full will-change-transform transform-gpu">
+                <img src="/fixed/welcome-vector-1.png"
+                     class="w-full h-full"
+                     alt="">
+            </div>
+            <div class="absolute hidden md:block left-0 top-0 md:right-0 md:left-auto w-full h-full will-change-transform transform-gpu">
+                <img src="/fixed/welcome-vector-1-mobile.png"
+                     class="w-full h-full"
+                     alt="">
+            </div>
 
-            <img src="/fixed/welcome-vector-2.svg"
-                 class="absolute right-[12%] top-[45vh] blur-[200px]"
-                 alt="">
+            <div class="absolute md:hidden right-0 top-0 w-full h-full will-change-transform transform-gpu">
+                <img src="/fixed/welcome-vector-2.png"
+                     class="w-full h-full"
+                     alt="">
+            </div>
+
+            <div class="absolute hidden md:block right-0 top-0 w-full h-full will-change-transform transform-gpu">
+                <img src="/fixed/welcome-vector-2-mobile.png"
+                     class="w-full h-full"
+                     alt="">
+            </div>
         </div>
 
         <div class="analytics-layer absolute md:relative  inset-0 z-20">
