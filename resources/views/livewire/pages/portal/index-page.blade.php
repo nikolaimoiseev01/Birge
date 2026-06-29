@@ -24,7 +24,7 @@
 
 <div class="text-[#071b25] relative">
 
-    <div class="page-bg fixed inset-0 h-screen pointer-events-none z-[-2] bg-azure-500"></div>
+    <div class="page-bg fixed inset-0 h-screen md:h-[130dvh] pointer-events-none z-[-2] bg-azure-500"></div>
 
     <div class="page-vectors fixed inset-0 h-screen pointer-events-none z-0 ">
         <img src="/fixed/welcome-vector-1.svg"
@@ -45,13 +45,14 @@
             <x-index-page-blocks.experts :experts="$experts"/>
         </div>
 
-        <div class="about-layer absolute inset-0 z-30 pointer-events-none md:relative md:inset-auto md:z-auto md:pointer-events-auto">
+        <div
+            class="about-layer absolute inset-0 z-30 pointer-events-none md:relative md:inset-auto md:z-auto md:pointer-events-auto">
             <x-index-page-blocks.expertise :expertise="$expertise"/>
         </div>
     </div>
 
-    <div class="analytics-telegram-transition relative h-screen overflow-visible bg-azure-500">
-        <div class="telegram-bg absolute inset-0 z-0 bg-azure-500"></div>
+    <div class="analytics-telegram-transition relative h-screen md:h-auto overflow-visible bg-azure-500">
+        <div class="telegram-bg absolute md:hidden inset-0 z-0 bg-azure-500"></div>
 
         <div class="telegram-vectors fixed inset-0 z-10 pointer-events-none opacity-0">
             <img src="/fixed/welcome-vector-1.svg"
@@ -63,11 +64,11 @@
                  alt="">
         </div>
 
-        <div class="analytics-layer absolute inset-0 z-20">
+        <div class="analytics-layer absolute md:relative md:bg-mint-200 inset-0 z-20">
             <x-index-page-blocks.analytics :articles="$articles"/>
         </div>
 
-        <div class="telegram-layer absolute inset-0 z-30 pointer-events-none">
+        <div class="telegram-layer absolute inset-0 z-30 pointer-events-none md:flex">
             <x-index-page-blocks.telegram :telegramPosts="$telegramPosts"/>
         </div>
     </div>
@@ -149,7 +150,7 @@
             });
 
             tl.to(teamLayer, {
-                y: -160,
+                y: isMobile ? 0 : -160,
                 opacity: 0,
                 ease: 'none',
                 duration: 0.2,
@@ -161,6 +162,7 @@
                 ease: 'none',
                 duration: 0.2,
             }, '<');
+            // }
 
             tl.to(pageBg, {
                 backgroundColor: '#EFF5E9',
@@ -172,6 +174,7 @@
                 duration: 0.15,
             });
 
+            // if (!isMobile) {
             tl.to(aboutLayer, {
                 opacity: 1,
                 y: 0,
@@ -184,14 +187,12 @@
                     aboutLayer.style.pointerEvents = 'none';
                 },
             });
-
-            if (!isMobile) {
-                tl.to(track, {
-                    x: () => -getScrollDistance(),
-                    ease: 'none',
-                    duration: 1,
-                });
-            }
+            tl.to(track, {
+                x: () => -getScrollDistance(),
+                ease: 'none',
+                duration: 1,
+            });
+            // }
 
             ScrollTrigger.refresh();
         }
@@ -240,17 +241,17 @@
                 opacity: 1,
             });
 
-            gsap.set(telegramLayer, {
-                opacity: 0,
-                y: 80,
-                pointerEvents: 'none',
-            });
+                gsap.set(telegramLayer, {
+                    opacity: 0,
+                    y: 80,
+                    pointerEvents: 'none',
+                });
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     id: 'analytics-telegram-transition-main',
                     trigger: wrapper,
-                    start: 'top top',
+                    start: 'bottom bottom',
                     end: () => isMobile
                         ? `+=${window.innerHeight * 1.4}`
                         : `+=${window.innerHeight * 0.9}`,
@@ -279,9 +280,11 @@
                 },
             }, 0);
 
-            tl.to({}, {
-                duration: 0.8,   // чем больше число, тем дольше он будет закреплен
-            });
+            if (!isMobile) {
+                tl.to({}, {
+                    duration: 0.8,   // чем больше число, тем дольше он будет закреплен
+                });
+            }
 
             // 2. Фон темнеет и вектора появляются одновременно
             if (bg) {
@@ -301,10 +304,12 @@
                 }, '<');
             }
 
-            // 3. Пауза
-            tl.to({}, {
-                duration: 0.15,
-            });
+            if (!isMobile) {
+                // 3. Пауза
+                tl.to({}, {
+                    duration: 0.15,
+                });
+            }
 
             // 4. Telegram появляется
             tl.to(telegramLayer, {
@@ -321,7 +326,7 @@
             });
 
             // удерживаем Telegram на экране
-            if(!isMobile) {
+            if (!isMobile) {
                 tl.to({}, {
                     duration: 0.8,   // чем больше число, тем дольше он будет закреплен
                 });
@@ -335,10 +340,13 @@
             initAnalyticsTelegramTransition();
         }
 
+        const isMobile = window.innerWidth < 768;
+        // if (!isMobile) {
         document.addEventListener('DOMContentLoaded', initPageTransitions);
-
         document.addEventListener('livewire:navigated', () => {
             setTimeout(initPageTransitions, 0);
         });
+        // }
+
     </script>
 @endpush

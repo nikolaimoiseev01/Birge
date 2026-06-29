@@ -54,7 +54,7 @@
         opacity:${active ? 1 : 0};
         height:${active ? 174 : 0}px;
     `"
-                    class="pointer-events-none fixed z-[9999]
+                    class="md:hidden pointer-events-none fixed z-[9999]
            w-[260px]
            -translate-x-1/2 -translate-y-1/2
            overflow-hidden rounded-lg bg-white shadow-2xl

@@ -1,4 +1,4 @@
-<section id="platform" class="pt-[90px] text-white sm:px-4 relative">
+<section id="platform" class="pt-[90px] text-white sm:px-4 relative md:mt-auto">
     <div class="mx-auto container">
         <div
             x-data="revealOnScroll()"
@@ -21,7 +21,7 @@
             </x-Ui.link>
         </div>
 
-        <div id="card-vertical-slider" class=" border-b border-bright-40/40 grid grid-cols-3 gap-3 lg:grid-cols-2 md:!grid-cols-1  pb-[180px] md:pb-[80px]">
+        <div id="card-vertical-slider" class=" border-b border-bright-40/40 md:border-none grid grid-cols-3 gap-3 lg:grid-cols-2 md:!grid-cols-1  pb-[180px] md:pb-[80px]">
             @foreach($telegramPosts as $i => $post)
                 <article
                     x-data="{
