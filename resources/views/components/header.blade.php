@@ -35,14 +35,48 @@
 
 <header
     x-data="{
-        menuOpen: false,
-        isHome: @js(request()->routeIs('portal.index') || request()->routeIs('portal.article_list')),
-        ...( @js(request()->routeIs('portal.index'))
-            ? revealOnScroll()
-            : { shown: true }
-        )
-    }"
-    @keydown.escape.window="menuOpen = false"
+    menuOpen: false,
+    scrollY: 0,
+
+    lockScroll() {
+        this.scrollY = window.scrollY;
+
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this.scrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+
+        document.documentElement.style.overflow = 'hidden';
+    },
+
+    unlockScroll() {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+
+        document.documentElement.style.overflow = '';
+
+        window.scrollTo(0, this.scrollY);
+    },
+
+    isHome: @js(request()->routeIs('portal.index') || request()->routeIs('portal.article_list')),
+    ...( @js(request()->routeIs('portal.index'))
+        ? revealOnScroll()
+        : { shown: true }
+    )
+}"
+    x-effect="menuOpen ? lockScroll() : unlockScroll()"
+
+    @destroy.window="
+    document.documentElement.classList.remove('overflow-hidden');
+    document.body.classList.remove('overflow-hidden');
+"
+    @keydown.escape.window="menuOpen = false; unlockScroll()"
     :class="[
         shown ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
         isHome ? 'absolute bg-transparent' : 'relative bg-mint-200'
@@ -159,13 +193,15 @@
     <div
         x-cloak
         x-show="menuOpen"
+        @touchmove.prevent
+        @wheel.prevent
         class="fixed inset-0 z-[999] hidden lg:block"
     >
         <div
             x-show="menuOpen"
             x-transition.opacity.duration.300ms
             class="absolute inset-0 bg-black/30"
-            @click="menuOpen = false"
+            @click="menuOpen = false; unlockScroll()"
         ></div>
 
         <div
@@ -176,11 +212,11 @@
             x-transition:leave="transition-transform duration-400 ease-[cubic-bezier(.7,0,.84,0)]"
             x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full"
-            class="absolute right-0 top-0 flex h-screen w-full flex-col bg-mint-200 px-4 pb-5 pt-12 text-azure-500 shadow-2xl"
+            class="absolute right-0 top-0 flex h-[100dvh] w-full flex-col bg-mint-200 px-4 pb-5 pt-12 text-azure-500 shadow-2xl"
         >
             <button
                 type="button"
-                @click="menuOpen = false"
+                @click="menuOpen = false; unlockScroll()"
                 class="absolute right-4 top-12 h-8 w-8"
                 aria-label="Закрыть меню"
             >
@@ -193,7 +229,7 @@
                     <a
                         href="{{ $item['href'] }}"
                         @if(!empty($item['anchor'])) data-anchor-link @endif
-                        @click="menuOpen = false"
+                        @click="menuOpen = false; unlockScroll()"
                         @if(!empty($item['navigate'])) wire:navigate @endif
                         class="{{ !empty($item['navigate']) ? 'js-page-transition' : '' }} transition-opacity hover:opacity-60"
                     >
@@ -202,8 +238,8 @@
                 @endforeach
             </nav>
 
-            <div class="mt-auto">
-                <x-Ui.link class="w-full justify-center" type="teal">
+            <div class="mt-auto mb-8">
+                <x-Ui.link class="w-full py-3 justify-center" type="teal">
                     Связаться с нами
                 </x-Ui.link>
             </div>
