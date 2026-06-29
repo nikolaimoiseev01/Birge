@@ -1,6 +1,6 @@
-<section class="flex items-center min-h-screen text-white md:pb-0 sm:px-4 ">
+<section class="flex items-center min-h-screen text-white md:pb-0 ">
     <div
-        class="mx-auto flex justify-between container gap-16 transition-all lg:flex-col lg:gap-10 lg:mt-32 md:w-full">
+        class="mx-auto flex justify-between container gap-16 transition-all lg:flex-col lg:gap-10 lg:mt-32">
         <div
             x-data="revealOnScroll(100)"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
