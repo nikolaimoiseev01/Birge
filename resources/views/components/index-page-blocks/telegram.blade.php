@@ -1,4 +1,4 @@
-<section id="platform" class="pt-[90px] text-white sm:px-4 relative md:mt-auto">
+<section id="platform" class="pt-[90px] text-white sm:px-4 relative md:mt-auto overflow-visible">
     <div class="mx-auto container">
         <div
             x-data="revealOnScroll()"

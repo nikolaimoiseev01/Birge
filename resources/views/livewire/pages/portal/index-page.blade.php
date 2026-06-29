@@ -69,7 +69,7 @@
     <div class="analytics-telegram-transition relative h-screen md:h-auto z-[99] overflow-visible ">
         <div class="telegram-bg absolute md:hidden inset-0 z-0 bg-azure-500"></div>
 
-        <div class="telegram-vectors fixed inset-0 z-10 pointer-events-none opacity-0">
+        <div class="telegram-vectors fixed inset-0 z-10 pointer-events-none opacity-0 h-[130dvh]">
             <div class="absolute md:hidden left-0 top-0 md:right-0 md:left-auto w-full h-full will-change-transform transform-gpu">
                 <img src="/fixed/welcome-vector-1.png"
                      class="w-full h-full"

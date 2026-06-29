@@ -9,7 +9,7 @@
     class="relative z-40 px-6 pt-[10px] md:pt-10 pb-10 sm:px-4 z-auto"
 >
     <div class="absolute w-full h-full bg-azure-500 inset-0 z-[-1]"></div>
-    <div class="mx-auto flex md:flex-col container gap-12 lg:grid-cols-1 relative z-40 font-light md:gap-10">
+    <div class="mx-auto flex md:flex-col container gap-12 lg:grid-cols-1 relative z-40 font-light md:gap-10 z-[99]">
         <div class=" md:order-2">
             <x-logo class="w-[140px] md:w-16"/>
         </div>
