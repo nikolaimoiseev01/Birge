@@ -5,6 +5,13 @@
     x-on:keydown.escape.window="close()"
     x-cloak
 >
+    <style>
+        @media (hover: hover) and (pointer: fine) {
+            .desktop-hover-bg:hover {
+                background-color: #dbe9dc;
+            }
+        }
+    </style>
     <template x-teleport="body">
         <div>
             <div
@@ -49,7 +56,7 @@
                             <button
                                 type="button"
                                 @click="change('prev')"
-                                class="flex items-center justify-center min-h-[124px] md:min-h-[90px] border-r border-[#b6d8d0] text-5xl font-light transition hover:bg-bright-600"
+                                class="flex items-center justify-center min-h-[124px] md:min-h-[90px] border-r border-[#b6d8d0] text-5xl font-light transition   desktop-hover-bg"
                             >
                                 <svg width="50" height="19" viewBox="0 0 50 19" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +70,7 @@
                             <button
                                 type="button"
                                 @click="change('next')"
-                                class="flex items-center min-h-[124px] md:min-h-[90px] justify-center text-5xl font-light transition hover:bg-bright-600"
+                                class="flex items-center min-h-[124px] md:min-h-[90px] justify-center text-5xl font-light transition  desktop-hover-bg"
                             >
                                 <svg width="50" height="19" viewBox="0 0 50 19" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
