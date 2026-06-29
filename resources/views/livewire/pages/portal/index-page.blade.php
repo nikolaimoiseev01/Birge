@@ -27,13 +27,17 @@
     <div class="page-bg fixed inset-0 h-screen md:h-[130dvh] pointer-events-none z-[-2] bg-azure-500"></div>
 
     <div class="page-vectors fixed inset-0 h-screen pointer-events-none z-0 ">
-        <img src="/fixed/welcome-vector-1.svg"
-             class="absolute left-[56%] top-0 -translate-x-1/2 blur-[200px]"
-             alt="">
+        <div class="absolute left-[56%] top-0 -translate-x-1/2 p-[220px] -m-[220px] will-change-transform transform-gpu">
+            <img src="/fixed/welcome-vector-1.svg"
+                 class="blur-[200px] scale-125"
+                 alt="">
+        </div>
 
-        <img src="/fixed/welcome-vector-2.svg"
-             class="absolute right-[12%] top-[45vh] blur-[200px]"
-             alt="">
+        <div class="absolute right-[12%] top-[45vh] p-[220px] -m-[220px] will-change-transform transform-gpu">
+            <img src="/fixed/welcome-vector-2.svg"
+                 class="blur-[200px] scale-125"
+                 alt="">
+        </div>
     </div>
 
     <x-index-page-blocks.welcome :first-article="$articles[0]"/>
