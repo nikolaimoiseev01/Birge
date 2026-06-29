@@ -38,7 +38,7 @@
 
     <x-index-page-blocks.welcome :first-article="$articles[0]"/>
 
-    <div class="team-about-transition relative h-screen overflow-hidden md:h-auto md:overflow-visible">
+    <div class="team-about-transition relative h-screen overflow-hidden md:h-auto md:overflow-visible z-[99]">
         <div class="transition-bg absolute inset-0 z-0 0"></div>
 
         <div class="team-layer absolute inset-0 z-20 md:relative md:inset-auto md:z-auto">
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="analytics-telegram-transition relative h-screen md:h-auto overflow-visible bg-azure-500">
+    <div class="analytics-telegram-transition relative h-screen md:h-auto z-[99] overflow-visible ">
         <div class="telegram-bg absolute md:hidden inset-0 z-0 bg-azure-500"></div>
 
         <div class="telegram-vectors fixed inset-0 z-10 pointer-events-none opacity-0">
@@ -64,11 +64,11 @@
                  alt="">
         </div>
 
-        <div class="analytics-layer absolute md:relative md:bg-mint-200 inset-0 z-20">
+        <div class="analytics-layer absolute md:relative  inset-0 z-20">
             <x-index-page-blocks.analytics :articles="$articles"/>
         </div>
 
-        <div class="telegram-layer absolute inset-0 z-30 pointer-events-none md:flex">
+        <div class="telegram-layer absolute inset-0 z-30 pointer-events-none md:relative">
             <x-index-page-blocks.telegram :telegramPosts="$telegramPosts"/>
         </div>
     </div>
@@ -111,7 +111,7 @@
             };
 
             // gsap.set(wrapper, {
-            //     backgroundColor: '#0F3F46',
+            //     backgroundColor: '#0a1c2b',
             // });
             gsap.set(vectors, {
                 opacity: 1,
@@ -167,7 +167,14 @@
             tl.to(pageBg, {
                 backgroundColor: '#EFF5E9',
                 ease: 'none',
+                zIndex: 9,
                 duration: 0.2,
+                onReverseComplete() {
+                    gsap.set(pageBg, {
+                        backgroundColor: '#0a1c2b',
+                        zIndex: -2,
+                    });
+                },
             }, '<');
 
             tl.to({}, {
@@ -206,6 +213,7 @@
             const vectors = wrapper?.querySelector('.telegram-vectors');
             const analyticsLayer = wrapper?.querySelector('.analytics-layer');
             const telegramLayer = wrapper?.querySelector('.telegram-layer');
+            const pageBg = document.querySelector('.page-bg');
 
             const isMobile = window.innerWidth < 768;
 
@@ -222,6 +230,7 @@
             });
 
             gsap.killTweensOf([wrapper, bg, vectors, analyticsLayer, telegramLayer]);
+
 
             if (bg) {
                 gsap.set(bg, {
@@ -241,11 +250,78 @@
                 opacity: 1,
             });
 
-                gsap.set(telegramLayer, {
-                    opacity: 0,
-                    y: 80,
-                    pointerEvents: 'none',
+            gsap.set(telegramLayer, {
+                opacity: 0,
+                y: 80,
+                pointerEvents: 'none',
+            });
+
+            if (isMobile) {
+                gsap.set([analyticsLayer, telegramLayer], {
+                    clearProps: 'all',
+                    opacity: 1,
+                    y: 0,
+                    pointerEvents: 'auto',
                 });
+
+                if (vectors) {
+                    gsap.set(vectors, {
+                        opacity: 0,
+                        y: 0,
+                    });
+                }
+
+                if (isMobile) {
+                    gsap.set([analyticsLayer, telegramLayer], {
+                        clearProps: 'all',
+                        opacity: 1,
+                        y: 0,
+                        pointerEvents: 'auto',
+                    });
+
+                    if (vectors) {
+                        gsap.set(vectors, {
+                            opacity: 0,
+                            y: 0,
+                        });
+                    }
+
+                    const mobileTl = gsap.timeline({
+                        scrollTrigger: {
+                            id: 'analytics-telegram-mobile-bg',
+                            trigger: telegramLayer,
+                            start: 'top bottom',
+                            end: 'top center',
+                            scrub: 1,
+                            invalidateOnRefresh: true,
+                        }
+                    });
+
+                    mobileTl.to(pageBg, {
+                        backgroundColor: '#0A1C2B',
+                        ease: 'none',
+                        duration: 1,
+                    }, 0);
+
+                    mobileTl.to(analyticsLayer, {
+                        opacity: 0,
+                        ease: 'none',
+                        duration: 1,
+                    }, 0);
+
+                    if (vectors) {
+                        mobileTl.to(vectors, {
+                            opacity: 1,
+                            ease: 'none',
+                            duration: 1,
+                        }, 0);
+                    }
+
+                    return;
+                }
+
+                return;
+            }
 
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -254,11 +330,11 @@
                     start: 'bottom bottom',
                     end: () => isMobile
                         ? `+=${window.innerHeight * 1.4}`
-                        : `+=${window.innerHeight * 0.9}`,
+                        : `+=${window.innerHeight * 1.4}`,
                     scrub: 1,
-                    pin: true,
-                    pinSpacing: true,
-                    anticipatePin: true,
+                    pin: !isMobile,
+                    pinSpacing: !isMobile,
+                    anticipatePin: isMobile ? 0 : 1,
                     invalidateOnRefresh: true,
                 }
             });
@@ -293,6 +369,15 @@
                     ease: 'none',
                     duration: 0.25,
                 }, '<');
+                tl.to(analyticsLayer, {
+                    opacity: 0,
+                }, '<');
+                tl.to(pageBg, {
+                    backgroundColor: '#0A1C2B',
+                    ease: 'none',
+                    zIndex: 9,
+                    duration: 0.2,
+                }, '<');
             }
 
             if (vectors) {
@@ -323,7 +408,7 @@
                 onReverseComplete() {
                     telegramLayer.style.pointerEvents = 'none';
                 },
-            });
+            }, '<');
 
             // удерживаем Telegram на экране
             if (!isMobile) {
