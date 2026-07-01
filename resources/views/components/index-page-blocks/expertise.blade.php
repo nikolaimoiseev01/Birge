@@ -5,7 +5,7 @@
     }
 </style>
 
-<section id="about" class="h-screen md:h-auto about-section overflow-hidden bg-transparent py-16 sm:px-4 relative z-40 ">
+<section id="about" class="h-screen md:h-auto about-section overflow-hidden bg-transparent py-16 md:px-4 relative z-40 ">
     <style>
         .gradient-border-circle-about {
             border-radius: 9999px;

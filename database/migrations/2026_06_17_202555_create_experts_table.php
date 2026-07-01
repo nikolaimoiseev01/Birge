@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('experts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description_short');
-            $table->text('description');
+            $table->json('name');
+            $table->json('description_short');
+            $table->json('description');
             $table->string('email')->nullable();
             $table->timestamps();
         });

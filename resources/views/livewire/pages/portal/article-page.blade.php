@@ -14,7 +14,7 @@
         }
     </style>
     @section('title')
-        {{$article['title']}}
+        {{$article->getLocalizedValue('title')}}
     @endsection
     <div class="flex flex-col mb-24 container md:mb-12">
         <div class="w-full py-12">
@@ -53,10 +53,10 @@
 
                 <h1 x-data="revealOnScroll()"
                     :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                    class="mb-8 max-w-5xl leading-none text-center transition-all duration-700 ease-out md:text-start">{{$article['title']}}</h1>
+                    class="mb-8 max-w-5xl leading-none text-center transition-all duration-700 ease-out md:text-start">{{$article->getLocalizedValue('title')}}</h1>
                 <span x-data="revealOnScroll()"
                       :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                      class="transition-all duration-700 ease-out max-w-2xl text-lg font-normal text-center">{{$article['description']}}</span>
+                      class="transition-all duration-700 ease-out max-w-2xl text-lg font-normal text-center">{{$article->getLocalizedValue('description')}}</span>
             </div>
         </div>
 

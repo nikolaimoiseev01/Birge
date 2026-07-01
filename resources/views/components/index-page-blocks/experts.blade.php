@@ -39,18 +39,18 @@
                             <img
                                 data-expert-image="{{ $expert->id }}"
                                 src="{{ $expert->getFirstMediaUrl('image') }}"
-                                alt="{{ $expert->name }}"
+                                alt="{{ $expert->getLocalizedValue('name') }}"
                                 class="object-cover transition hover:scale-105 duration-500"
                             >
                         </div>
 
                         <div class="min-h-[190px] md:min-h-[153px] max-w-[328px] md:max-w-[280px] bg-bright-40/10 p-4 pt-5 flex flex-col">
                             <h3 class="text-[22px] md:text-[17px] font-semibold leading-tight">
-                                {{ $expert->name }}
+                                {{ $expert->getLocalizedValue('name') }}
                             </h3>
 
                             <p class="mt-4 text-lg font-normal md:text-sm leading-[120%] text-white/60">
-                                {{ $expert->description_short }}
+                                {{ $expert->getLocalizedValue('description_short') }}
                             </p>
 
                             <span class="font-normal md:text-sm block mt-auto text-lg text-white">

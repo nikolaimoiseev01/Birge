@@ -52,7 +52,7 @@
         class="relative z-40 mb-16"
     >
         {{-- Desktop --}}
-        <div class="flex gap-2 transition-all duration-700 ease-out md:hidden">
+        <div class="flex flex-wrap gap-2 transition-all duration-700 ease-out md:hidden">
             @foreach($filterItems as $i => $item)
                 <button
                     type="button"
@@ -132,7 +132,7 @@
 
     <div
         class="transition-all duration-700 ease-out flex flex-col gap-4 pb-[180px] md:pb-[80px] border-b border-bright-40/40 mb-6 md:w-full">
-        <div class="grid grid-cols-3 gap-x-4 gap-y-16 lg:grid-cols-2 md:flex-col md:flex md:gap-y-12">
+        <div class="grid grid-cols-3 gap-x-4 gap-y-16 xl:grid-cols-2 md:flex-col md:flex md:gap-y-12">
             @foreach($articles as $i => $article)
                 <div
                     x-data="revealOnScroll({{ $i * 70 }})"

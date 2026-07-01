@@ -53,7 +53,16 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', IndexPage::class)->name('portal.index');
 Route::get('/articles', ArticleListPage::class)->name('portal.article_list');
-Route::get('/articles/{slug}', ArticlePage::class)->name('portal.article');
+Route::get('/articles/{id}', ArticlePage::class)->name('portal.article');
+
+Route::post('/language', function () {
+    $locale = request()->input('locale');
+    if (in_array($locale, ['ru', 'en', 'kk'])) {
+        session()->put('locale', $locale);
+        app()->setLocale($locale);
+    }
+    return response()->json(['locale' => $locale]);
+})->name('language.switch');
 
 Route::middleware('auth')->prefix('account')->group(function () {
     Route::get('settings', SettingsPage::class)->middleware(['auth', 'verified'])->name('account.settings');

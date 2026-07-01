@@ -94,15 +94,15 @@
                             @if($expert)
                                 <div class=" md:px-0 mr-auto md:pb-[110px]">
                                     <h2 class="mb-6 text-mint-900">
-                                        {{ $expert->name }}
+                                        {{ $expert->getLocalizedValue('name') }}
                                     </h2>
 
                                     <p class="mb-14 max-w-[360px] text-lg leading-[120%] text-azure-600/60">
-                                        {{ $expert->description_short }}
+                                        {{ $expert->getLocalizedValue('description_short') }}
                                     </p>
 
                                     <div class="mb-14 max-w-[588px] text-lg leading-[120%] text-azure-600">
-                                        {!! $expert->description !!}
+                                        {!! $expert->getLocalizedValue('description') !!}
                                     </div>
 
                                     @if($expert->email)

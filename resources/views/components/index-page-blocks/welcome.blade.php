@@ -93,7 +93,7 @@
            lg:max-w-md overflow-hidden hover:cursor-none"
             >
                 <a
-                    href="{{ route('portal.article', $firstArticle->slug) }}"
+                    href="{{ route('portal.article', $firstArticle->id) }}"
                     wire:navigate
                     x-ref="link"
                     :style="`transform: translate(${x}px, ${y}px) translate(-50%, -50%)`"
@@ -132,15 +132,15 @@
                 </div>
 
                 <h2 class="text-[22px] md:!text-[17px] font-medium leading-[110%] line-clamp-4">
-                    {{ $firstArticle->title }}
+                    {{ $firstArticle->getLocalizedValue('title') }}
                 </h2>
 
                 <p class="text-white line-clamp-4 leading-[130%]">
-                    {{ $firstArticle->description }}
+                    {{ $firstArticle->getLocalizedValue('description') }}
                 </p>
 
                 <a
-                    href="{{ route('portal.article', $firstArticle->slug) }}"
+                    href="{{ route('portal.article', $firstArticle->getLocalizedValue('slug')) }}"
                     class="hidden md:block text-white underline text-sm"
                 >
                     Читать статью

@@ -27,8 +27,21 @@ class Article extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $casts = [
+        'title' => 'array',
+        'slug' => 'array',
+        'description' => 'array',
         'content' => 'array',
     ];
+
+    public function getLocalizedValue($column)
+    {
+        $value = $this->{$column};
+        if (is_array($value)) {
+            $locale = app()->getLocale();
+            return $value[$locale] ?? $value['ru'] ?? reset($value) ?? '';
+        }
+        return $value;
+    }
 
     public function category(): BelongsTo
     {

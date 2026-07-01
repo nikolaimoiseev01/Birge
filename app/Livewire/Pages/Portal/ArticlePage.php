@@ -15,8 +15,9 @@ class ArticlePage extends Component
         return view('livewire.pages.portal.article-page');
     }
 
-    public function mount($slug) {
-        $this->article = Article::query()->with('category')->where('slug', $slug)->first();
+    public function mount($id) {
+        $locale = app()->getLocale();
+        $this->article = Article::query()->with('category')->where("id", $id)->first();
         $this->otherArticles = Article::query()->with('category')->where('id', '!=', $this->article->id)->take(3)->get();
     }
 }

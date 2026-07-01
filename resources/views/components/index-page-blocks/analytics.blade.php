@@ -87,7 +87,7 @@
 
             @foreach($articles as $i => $article)
                 <a
-                    href="{{ route('portal.article', $article->slug) }}"
+                    href="{{ route('portal.article', $article->id) }}"
                     wire:navigate
                     x-data="revealOnScroll({{ $i * 70 }})"
                     @mouseenter="show({{ $i }})"
@@ -101,11 +101,11 @@
                     </time>
 
                     <h3 class="line-clamp-2 text-2xl leading-[110%] max-w-[520px] font-semibold md:text-[17px] text-azure-600">
-                        {{ $article['title'] }}
+                        {{ $article->getLocalizedValue('title') }}
                     </h3>
 
                     <p class="line-clamp-3 ml-auto text-lg leading-[130%] max-w-[523px]  md:text-sm text-azure-600 lg:col-start-2 md:col-start-auto">
-                        {{ $article['description'] }}
+                        {{ $article->getLocalizedValue('description') }}
                     </p>
                 </a>
             @endforeach

@@ -115,15 +115,7 @@
 
                 {{-- Lang --}}
                 <div
-                    x-data="{
-        open: false,
-        lang: 'Ru',
-        langs: ['Ru', 'Kz', 'En'],
-
-        otherLangs() {
-            return this.langs.filter(item => item !== this.lang)
-        }
-    }"
+                    x-data="languageSwitcher('{{ session('locale', 'ru') }}')"
                     class="relative"
                 >
                     <button
@@ -160,13 +152,19 @@
                         x-transition:leave="transition ease-in duration-150"
                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                         x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
-                        class="absolute right-0 top-full z-50 mt-3 flex w-[51px] flex-col gap-4 rounded-[8px] border border-white/60 bg-[#e2f1f0]/10 p-4 text-white shadow-[0_8px_30px_rgba(0,0,0,.25)] backdrop-blur-md"
+                        :class="isHome
+    ? 'border-white/60 bg-black/30 text-white'
+    : 'border-azure-500/15 bg-white text-azure-500'"
+                        class="absolute right-0 top-full z-50 mt-3 flex w-[51px] flex-col gap-4 rounded-[8px] p-4 shadow-[0_8px_30px_rgba(0,0,0,.25)] backdrop-blur-md"
                     >
                         <template x-for="item in otherLangs()" :key="item">
                             <button
                                 type="button"
-                                @click="lang = item; open = false"
-                                class="text-left text-base font-medium transition hover:text-[#8dd5c2]"
+                                @click="changeLanguage(item)"
+                                :class="isHome
+                            ? 'hover:text-[#8dd5c2]'
+                            : 'hover:text-mint-500'"
+                                class="text-left text-base font-medium transition"
                                 x-text="item"
                             ></button>
                         </template>
@@ -246,3 +244,49 @@
         </div>
     </div>
 </header>
+
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('languageSwitcher', (currentLocale = 'ru') => ({
+            open: false,
+
+            lang: currentLocale === 'kk'
+                ? 'Kz'
+                : currentLocale === 'en'
+                    ? 'En'
+                    : 'Ru',
+
+            langs: ['Ru', 'Kz', 'En'],
+
+            otherLangs() {
+                return this.langs.filter(item => item !== this.lang)
+            },
+
+            async changeLanguage(newLang) {
+                const localeMap = {
+                    Ru: 'ru',
+                    Kz: 'kk',
+                    En: 'en',
+                };
+
+                const locale = localeMap[newLang];
+
+                const response = await fetch('/language', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    },
+                    body: JSON.stringify({ locale }),
+                });
+
+                if (response.ok) {
+                    this.lang = newLang;
+                    this.open = false;
+                    window.location.reload();
+                }
+            },
+        }));
+    });
+</script>
