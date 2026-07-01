@@ -140,7 +140,7 @@
                 </p>
 
                 <a
-                    href="{{ route('portal.article', $firstArticle->getLocalizedValue('slug')) }}"
+                    href="{{ route('portal.article', $firstArticle->id) }}"
                     class="hidden md:block text-white underline text-sm"
                 >
                     Читать статью
