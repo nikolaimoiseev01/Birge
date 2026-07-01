@@ -14,13 +14,13 @@ class ExpertsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name.ru')
                     ->searchable()
                     ->sortable()
                     ->formatStateUsing(fn ($state) => $state['ru'] ?? $state['en'] ?? is_array($state) ? reset($state) : $state),
-                TextColumn::make('description_short')
+                TextColumn::make('description_short.ru')
                     ->searchable()
-                    ->limit(50)
+                    ->limit(25)
                     ->label('Краткое описание')
                     ->formatStateUsing(fn ($state) => $state['ru'] ?? $state['en'] ?? is_array($state) ? reset($state) : $state),
                 TextColumn::make('email')
