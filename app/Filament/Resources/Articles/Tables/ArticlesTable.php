@@ -14,9 +14,10 @@ class ArticlesTable
     {
         return $table
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('title.ru')
                     ->searchable()
                     ->sortable()
+                    ->limit(25)
                     ->formatStateUsing(fn ($state) => $state['ru'] ?? $state['en'] ?? is_array($state) ? reset($state) : $state),
                 TextColumn::make('category.name')
                     ->searchable()
@@ -26,9 +27,9 @@ class ArticlesTable
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->formatStateUsing(fn ($state) => $state['ru'] ?? $state['en'] ?? is_array($state) ? reset($state) : $state),
-                TextColumn::make('description')
+                TextColumn::make('description.ru')
                     ->searchable()
-                    ->limit(50)
+                    ->limit(20)
                     ->label('Описание')
                     ->formatStateUsing(fn ($state) => $state['ru'] ?? $state['en'] ?? is_array($state) ? reset($state) : $state),
                 TextColumn::make('date')
